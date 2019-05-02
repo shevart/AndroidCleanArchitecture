@@ -1,0 +1,51 @@
+// Project & application data
+ext {
+    APP_ID = "com.shevart.rocketlaunches"
+
+    projectMinSDKVersion = 21
+    projectCompileSDKVersion = 28
+    projectTargetSDKVersion = 28
+    buildTools = "28.0.3"
+
+    applicationCodeVersion = 1
+    applicationNameVersion = "0.0.1"
+}
+
+// Dependencies data
+ext {
+    // kotlin
+    kotlin_ktx_version = '1.0.1'
+
+    // libs
+    supportVersion = '27.1.1'
+    appCompatVersion = '1.0.2'
+    constraintVersion = '1.1.3'
+
+    arch_components_vers = '1.1.1'
+
+    rxJavaVersion = '2.2.5'
+    rxAndroidVersion = '2.1.0'
+    rxBindingsVersion = '2.0.0'
+
+    stethoVersion = '1.5.0'
+    okHttpVersion = '3.9.0'
+    retrofitVersion = '2.3.0'
+    gsonVersion = '2.8.4'
+
+    daggerVersion = '2.14.1'
+    daggerAdnroidVersion = '2.15'
+    javaxAnnotationVersion = '1.0'
+    javaxVersion = '1@jar'
+
+    // ui
+    glide = '4.3.1'
+
+    // test
+    junitVersion = '4.12'
+    runnerVersion = '1.0.1'
+    espressoVersion = '3.0.1'
+    androidAnnotationsVersion = '27.1.1'
+    androidRunnerVersion = '1.0.1'
+    mockitoCore = '2.19.0'
+    mockitoKotlin = '2.0.0-RC1'
+}
