@@ -10,7 +10,10 @@ ext {
     applicationCodeVersion = 1
     applicationNameVersion = "0.0.1"
 }
-
+// Test runner
+ext {
+    projectTestRunner = "androidx.test.runner.AndroidJUnitRunner"
+}
 // Dependencies data
 ext {
     // kotlin

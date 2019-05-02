@@ -1,18 +1,18 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion projectCompileSDKVersion
     defaultConfig {
-        applicationId APP_ID
         minSdkVersion projectMinSDKVersion
         targetSdkVersion projectTargetSDKVersion
         versionCode applicationCodeVersion
         versionName applicationNameVersion
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner projectTestRunner
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -22,21 +22,11 @@ android {
 }
 
 dependencies {
+    // Modules
+    implementation project(':domain')
     // Kotlin
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    // Android
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.core:core-ktx:$kotlin_ktx_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
-    // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-    // Dagger
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerAdnroidVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-
-    // testing
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Testing
     testImplementation "junit:junit:$junitVersion"
     testImplementation "com.android.support.test:runner:$runnerVersion"
     testImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
