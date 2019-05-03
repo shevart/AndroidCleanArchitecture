@@ -60,19 +60,16 @@ abstract class BaseFragment : Fragment() {
     }
 
     @Suppress("unused")
-    protected fun Disposable.disposeOnStop() =
-        this.apply {
-            onStopDisposables.add(this)
-        }
+    protected fun Disposable.disposeOnStop() = this.apply {
+        onStopDisposables.add(this)
+    }
 
-    protected fun Disposable.disposeOnDestroy() =
-        this.apply {
-            onDestroyDisposables.add(this)
-        }
+    protected fun Disposable.disposeOnDestroy() = this.apply {
+        onDestroyDisposables.add(this)
+    }
 
-    protected fun Disposable.disposeOnDestroyView() =
-        this.apply {
-            onViewDestroyDisposables.add(this)
-        }
+    protected fun Disposable.disposeOnDestroyView() = this.apply {
+        onViewDestroyDisposables.add(this)
+    }
 
 }
