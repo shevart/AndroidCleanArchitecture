@@ -33,6 +33,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.core:core-ktx:$kotlin_ktx_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtentionsVersion"
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
@@ -40,6 +41,8 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerAdnroidVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    // UI
+    implementation "androidx.recyclerview:recyclerview:$recycleViewVersion"
 
     // Testing
     testImplementation "junit:junit:$junitVersion"
@@ -51,5 +54,4 @@ dependencies {
     androidTestImplementation "com.android.support:support-annotations:$androidAnnotationsVersion"
     androidTestImplementation "com.android.support.test:runner:$androidRunnerVersion"
     androidTestImplementation "com.android.support.test:rules:$androidRunnerVersion"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 }
