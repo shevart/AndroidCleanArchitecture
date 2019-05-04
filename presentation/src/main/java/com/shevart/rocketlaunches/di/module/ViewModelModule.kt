@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.shevart.rocketlaunches.base.mvvm.ViewModelFactory
 import com.shevart.rocketlaunches.screen.home.host.MainScreenViewModel
+import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -19,6 +20,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainScreenViewModel::class)
     internal abstract fun bindMainScreenViewModel(viewModel: MainScreenViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LaunchesListViewModel::class)
+    internal abstract fun bindLaunchesListViewModel(viewModel: LaunchesListViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
