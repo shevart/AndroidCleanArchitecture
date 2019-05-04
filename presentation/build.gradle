@@ -44,6 +44,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     // UI
     implementation "androidx.recyclerview:recyclerview:$recycleViewVersion"
+    implementation "pl.droidsonroids.gif:android-gif-drawable:$gifVersion"
 
     // Testing
     testImplementation "junit:junit:$junitVersion"

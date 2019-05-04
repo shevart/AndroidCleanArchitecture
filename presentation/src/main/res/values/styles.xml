@@ -2,4 +2,12 @@
 
     <style name="RWidget" />
 
+    <style name="RWidget.TextView" />
+
+    <style name="RWidget.TextView.Title">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/greyDark</item>
+        <item name="android:textSize">@dimen/testTitleDimen</item>
+    </style>
+
 </resources>

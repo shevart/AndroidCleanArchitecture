@@ -45,6 +45,7 @@ ext {
     // ui
     glideVersion = '4.3.1'
     recycleViewVersion = '1.0.0'
+    gifVersion = '1.2.16'
 
     // test
     junitVersion = '4.12'
