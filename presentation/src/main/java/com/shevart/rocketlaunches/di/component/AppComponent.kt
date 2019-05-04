@@ -4,6 +4,7 @@ import com.shevart.rocketlaunches.core.app.RocketLaunchesApp
 import com.shevart.rocketlaunches.di.module.AppModule
 import com.shevart.rocketlaunches.di.module.CoreModule
 import com.shevart.rocketlaunches.di.module.ViewModelModule
+import com.shevart.rocketlaunches.screen.home.host.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,4 +18,6 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(app: RocketLaunchesApp)
+
+    fun inject(activity: MainActivity)
 }

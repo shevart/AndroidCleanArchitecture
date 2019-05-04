@@ -34,6 +34,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$kotlin_ktx_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtentionsVersion"
+    implementation "com.google.android.material:material:$materialVersion"
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
