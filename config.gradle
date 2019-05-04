@@ -23,6 +23,7 @@ ext {
     supportVersion = '27.1.1'
     appCompatVersion = '1.0.2'
     constraintVersion = '1.1.3'
+    lifecycleExtentionsVersion = '2.0.0'
 
     arch_components_vers = '1.1.1'
 
@@ -41,7 +42,8 @@ ext {
     javaxVersion = '1@jar'
 
     // ui
-    glide = '4.3.1'
+    glideVersion = '4.3.1'
+    recycleViewVersion = '1.0.0'
 
     // test
     junitVersion = '4.12'
