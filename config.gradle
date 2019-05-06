@@ -43,7 +43,7 @@ ext {
     javaxVersion = '1@jar'
 
     // ui
-    glideVersion = '4.3.1'
+    picassoVersion = '2.5.2'
     recycleViewVersion = '1.0.0'
     cardViewVersion = '1.0.0'
     gifVersion = '1.2.16'

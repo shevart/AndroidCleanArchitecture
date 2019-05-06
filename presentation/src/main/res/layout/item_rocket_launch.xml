@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:cardCornerRadius="@dimen/baseDimen"
-        app:cardElevation="@dimen/doubleDimen"
+        app:cardElevation="@dimen/baseDimen"
         app:cardUseCompatPadding="true"
         app:cardBackgroundColor="@color/greyDark"
         app:layout_constraintBottom_toBottomOf="parent"

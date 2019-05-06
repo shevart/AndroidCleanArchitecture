@@ -40,11 +40,12 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
                     status = UILaunchStatus(
                         statusResId = R.string.app_name,
                         backgroundResId = R.drawable.gradient_splash_bg
-                    )
+                    ),
+                    imageUrl = "https://s3.amazonaws.com/launchlibrary/RocketImages/Falcon1.jpg_720.jpg"
                 ),
                 UILaunch(
                     id = 1,
-                    name = "Falcon - 1",
+                    name = "Falcon - 1 by Elon Musk by Tesla and SpaceX",
                     countryFlagResId = R.drawable.flag_usa,
                     countryName = "USA",
                     favoritesIconResId = R.drawable.ic_favorite_white,
@@ -52,7 +53,8 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
                     status = UILaunchStatus(
                         statusResId = R.string.app_name,
                         backgroundResId = R.drawable.gradient_splash_bg
-                    )
+                    ),
+                    imageUrl = "https://s3.amazonaws.com/launchlibrary/RocketImages/Falcon+9+v1.0_720.jpg"
                 ),
                 UILaunch(
                     id = 1,

@@ -46,6 +46,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$recycleViewVersion"
     implementation "androidx.cardview:cardview:$cardViewVersion"
     implementation "pl.droidsonroids.gif:android-gif-drawable:$gifVersion"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
 
     // Testing
     testImplementation "junit:junit:$junitVersion"

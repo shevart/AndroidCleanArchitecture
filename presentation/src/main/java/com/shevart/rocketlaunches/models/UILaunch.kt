@@ -1,7 +1,6 @@
 package com.shevart.rocketlaunches.models
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 
 data class UILaunch(
     val id: Long,
@@ -12,6 +11,7 @@ data class UILaunch(
     @DrawableRes
     val favoritesIconResId: Int,
     val date: String,
-    val status: UILaunchStatus
+    val status: UILaunchStatus,
+    val imageUrl: String? = null
 
 )
