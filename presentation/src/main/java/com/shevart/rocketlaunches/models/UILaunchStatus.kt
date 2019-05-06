@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 
 data class UILaunchStatus(
     @StringRes
-    val statusResI: Int,
+    val statusResId: Int,
     @DrawableRes
     val backgroundResId: Int
 )

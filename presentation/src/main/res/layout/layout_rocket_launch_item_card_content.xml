@@ -21,14 +21,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        tools:ignore="KeyboardInaccessibleWidget">
 
         <ImageView
             android:id="@+id/ivRocketLaunchItemFlag"
             android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/rocket_launch_country_flag_description"
             android:cropToPadding="false"
@@ -82,7 +85,14 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvRocketLaunchItemCountry"
             app:layout_constraintEnd_toEndOf="@+id/tvRocketLaunchItemTitle"
             app:layout_constraintTop_toTopOf="@+id/tvRocketLaunchItemCountry"
-            app:srcCompat="@drawable/ic_favorite_white" />
+            tools:srcCompat="@drawable/ic_favorite_white" />
+
+        <com.shevart.rocketlaunches.screen.customview.launchstatus.LaunchStatusView
+            android:id="@+id/svRocketLaunchItemStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRocketLaunchItemDate"
+            app:layout_constraintEnd_toEndOf="@+id/tvRocketLaunchItemTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

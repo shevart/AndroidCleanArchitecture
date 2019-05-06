@@ -1,4 +1,4 @@
-package com.shevart.rocketlaunches.screen.shared.error
+package com.shevart.rocketlaunches.screen.customview.error
 
 import android.content.Context
 import android.util.AttributeSet

@@ -7,7 +7,7 @@ data class UILaunch(
     val id: Long,
     val name: String,
     @DrawableRes
-    val countryFlagId: Int,
+    val countryFlagResId: Int,
     val countryName: String,
     @DrawableRes
     val favoritesIconResId: Int,
