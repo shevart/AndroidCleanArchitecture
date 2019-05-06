@@ -9,4 +9,13 @@
     <color name="greyDark">#282828</color>
 
     <color name="blackAlpha20">#33000000</color>
+
+    <color name="statusGreenStart">#7ab402</color>
+    <color name="statusGreenEnd">#4eba1a</color>
+    <color name="statusRedStart">#FF416C</color>
+    <color name="statusRedEnd">#FF4B2B</color>
+    <color name="statusBlueStart">#56CCF2</color>
+    <color name="statusBlueEnd">#2F80ED</color>
+    <color name="statusGreyStart">#232526</color>
+    <color name="statusGreyEnd">#414345</color>
 </resources>

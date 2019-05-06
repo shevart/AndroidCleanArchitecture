@@ -39,7 +39,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
                     date = "12.22.1999",
                     status = UILaunchStatus(
                         statusResId = R.string.app_name,
-                        backgroundResId = R.drawable.gradient_splash_bg
+                        backgroundResId = R.drawable.gradient_status_green
                     ),
                     imageUrl = "https://s3.amazonaws.com/launchlibrary/RocketImages/Falcon1.jpg_720.jpg"
                 ),
@@ -52,7 +52,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
                     date = "12.22.1999",
                     status = UILaunchStatus(
                         statusResId = R.string.app_name,
-                        backgroundResId = R.drawable.gradient_splash_bg
+                        backgroundResId = R.drawable.gradient_status_red
                     ),
                     imageUrl = "https://s3.amazonaws.com/launchlibrary/RocketImages/Falcon+9+v1.0_720.jpg"
                 ),
@@ -65,7 +65,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
                     date = "12.22.1999",
                     status = UILaunchStatus(
                         statusResId = R.string.app_name,
-                        backgroundResId = R.drawable.gradient_splash_bg
+                        backgroundResId = R.drawable.gradient_status_blue
                     )
                 ),
                 UILaunch(
@@ -77,7 +77,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
                     date = "12.22.1999",
                     status = UILaunchStatus(
                         statusResId = R.string.app_name,
-                        backgroundResId = R.drawable.gradient_splash_bg
+                        backgroundResId = R.drawable.gradient_status_grey
                     )
                 )
             )
