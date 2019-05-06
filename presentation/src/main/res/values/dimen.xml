@@ -7,5 +7,6 @@
 
     <dimen name="textNormalDimen">14sp</dimen>
     <dimen name="textMediumDimen">16sp</dimen>
-    <dimen name="textTitleDimen">33sp</dimen>
+    <dimen name="textTitleDimen">21sp</dimen>
+    <dimen name="textBigTitleDimen">33sp</dimen>
 </resources>

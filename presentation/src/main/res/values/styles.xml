@@ -7,7 +7,7 @@
     <style name="RWidget.TextView.Title">
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textColor">@color/greyDark</item>
-        <item name="android:textSize">@dimen/textTitleDimen</item>
+        <item name="android:textSize">@dimen/textBigTitleDimen</item>
     </style>
 
 </resources>

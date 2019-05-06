@@ -60,7 +60,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="@color/white"
-            android:textSize="@dimen/textTitleDimen"
+            android:textSize="@dimen/textBigTitleDimen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/ivRocketLaunchItemFlag"
