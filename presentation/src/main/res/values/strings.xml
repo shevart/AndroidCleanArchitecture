@@ -5,4 +5,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rocket_launch_image_description">Rocket launch image</string>
+    <string name="rocket_launch_favorite_button_description">Rocket launch favorite button</string>
+    <string name="rocket_launch_country_flag_description">Rocket launch country flag</string>
 </resources>

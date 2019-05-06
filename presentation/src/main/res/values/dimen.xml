@@ -5,5 +5,7 @@
     <dimen name="mediumDimen">24dp</dimen>
     <dimen name="largeDimen">32dp</dimen>
 
-    <dimen name="testTitleDimen">33sp</dimen>
+    <dimen name="textNormalDimen">14sp</dimen>
+    <dimen name="textMediumDimen">16sp</dimen>
+    <dimen name="textTitleDimen">33sp</dimen>
 </resources>
