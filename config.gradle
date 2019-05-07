@@ -24,6 +24,7 @@ ext {
     appCompatVersion = '1.0.2'
     constraintVersion = '1.1.3'
     lifecycleExtentionsVersion = '2.0.0'
+    materialVersion = '1.1.0-alpha06'
 
     arch_components_vers = '1.1.1'
 
@@ -42,8 +43,10 @@ ext {
     javaxVersion = '1@jar'
 
     // ui
-    glideVersion = '4.3.1'
+    picassoVersion = '2.5.2'
     recycleViewVersion = '1.0.0'
+    cardViewVersion = '1.0.0'
+    gifVersion = '1.2.16'
 
     // test
     junitVersion = '4.12'

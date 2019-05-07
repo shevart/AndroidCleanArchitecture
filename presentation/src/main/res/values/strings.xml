@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">RocketLaunches</string>
+    <string name="launches">Launches</string>
+    <string name="favorites">Favorites</string>
+
+    <string name="launch_status_successfully">Successfully</string>
+    <string name="launch_status_failed">Failed</string>
+    <string name="launch_status_canceled">Canceled</string>
+    <string name="launch_status_scheduled">Scheduled</string>
+    <string name="launch_status_unknown">Unknown</string>
+
+    <string name="error_no_internet">No internet connection!</string>
+    <string name="error_unknown">Unknown</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rocket_launch_image_description">Rocket launch image</string>
+    <string name="rocket_launch_favorite_button_description">Rocket launch favorite button</string>
+    <string name="rocket_launch_country_flag_description">Rocket launch country flag</string>
 </resources>

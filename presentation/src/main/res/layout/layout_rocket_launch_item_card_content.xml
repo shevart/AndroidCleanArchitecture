@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@color/greyDark">
+
+    <ImageView
+        android:id="@+id/ivRocketLaunchItemCover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/rocket_launch_image_description"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/gradient_black_alpha_to_transparent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        tools:ignore="KeyboardInaccessibleWidget">
+
+        <ImageView
+            android:id="@+id/ivRocketLaunchItemFlag"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/rocket_launch_country_flag_description"
+            android:cropToPadding="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/flag_usa" />
+
+        <TextView
+            android:id="@+id/tvRocketLaunchItemCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textMediumDimen"
+            app:layout_constraintBottom_toBottomOf="@+id/ivRocketLaunchItemFlag"
+            app:layout_constraintStart_toEndOf="@+id/ivRocketLaunchItemFlag"
+            app:layout_constraintTop_toTopOf="@+id/ivRocketLaunchItemFlag"
+            tools:text="USA" />
+
+        <TextView
+            android:id="@+id/tvRocketLaunchItemTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textBigTitleDimen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/ivRocketLaunchItemFlag"
+            app:layout_constraintTop_toBottomOf="@+id/ivRocketLaunchItemFlag"
+            tools:text="Falcon - 1" />
+
+        <TextView
+            android:id="@+id/tvRocketLaunchItemDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textNormalDimen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvRocketLaunchItemTitle"
+            tools:text="29.05.1993" />
+
+        <ImageView
+            android:id="@+id/ivRocketLaunchItemFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/rocket_launch_favorite_button_description"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRocketLaunchItemCountry"
+            app:layout_constraintEnd_toEndOf="@+id/tvRocketLaunchItemTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvRocketLaunchItemCountry"
+            tools:srcCompat="@drawable/ic_favorite_white" />
+
+        <com.shevart.rocketlaunches.screen.customview.launchstatus.LaunchStatusView
+            android:id="@+id/svRocketLaunchItemStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRocketLaunchItemDate"
+            app:layout_constraintEnd_toEndOf="@+id/tvRocketLaunchItemTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

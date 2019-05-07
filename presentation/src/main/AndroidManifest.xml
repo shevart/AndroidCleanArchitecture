@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.shevart.rocketlaunches">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".core.app.RocketLaunchesApp"
         android:allowBackup="false"
@@ -12,7 +14,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".screen.home.MainActivity"
+            android:name=".screen.home.host.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
