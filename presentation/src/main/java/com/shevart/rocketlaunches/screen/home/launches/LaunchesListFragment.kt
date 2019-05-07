@@ -78,6 +78,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         evLaunchesError.gone()
         rvLaunches.visible()
         adapter.updateItems(state.launchesItems)
+        tvLaunchesTitle.textColorByColorId(R.color.greyDark)
     }
 
     private fun showError(state: Error) {
