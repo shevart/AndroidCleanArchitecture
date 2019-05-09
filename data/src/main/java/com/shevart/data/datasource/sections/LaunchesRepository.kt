@@ -23,14 +23,13 @@ class LaunchesRepository
         param: PageRequest,
         fetchPolicy: FetchPolicy
     ): Single<PageResult<RocketLaunch>> {
-        if (fetchPolicy == REMOTE_ONLY || launches.isEmpty()) {
-            return loadLaunchesRemote(param)
+        val loadRemote =
+            (fetchPolicy == REMOTE_ONLY) || param.biggerThanCacheItemsCount(launches.size)
+        return if (loadRemote) {
+            loadLaunchesRemote(param)
+        } else {
+            getFromCache(param)
         }
-        if ((param.offset + param.count + 1) <= launches.size) {
-            return getFromCache(param)
-        }
-
-        TODO()
     }
 
     private fun getFromCache(param: PageRequest) =
@@ -60,5 +59,10 @@ class LaunchesRepository
             launches.addAll(result.items)
         }
         totalLaunchesCount = result.totalCount
+    }
+
+    private companion object {
+        private fun PageRequest.biggerThanCacheItemsCount(itemsCount: Int) =
+            (this.offset + this.count + 1) > itemsCount
     }
 }
