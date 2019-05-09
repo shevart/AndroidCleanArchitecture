@@ -1,6 +1,8 @@
 package com.shevart.rocketlaunches.core.app
 
 import android.app.Application
+import com.facebook.stetho.Stetho
+import com.shevart.rocketlaunches.BuildConfig
 import com.shevart.rocketlaunches.di.component.AppComponent
 import com.shevart.rocketlaunches.di.component.DaggerAppComponent
 import com.shevart.rocketlaunches.di.module.AppModule
@@ -15,6 +17,10 @@ class RocketLaunchesApp : Application() {
             .builder()
             .appModule(AppModule(this))
             .build()
+
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+        }
     }
 
     fun getAppComponent() = appComponent

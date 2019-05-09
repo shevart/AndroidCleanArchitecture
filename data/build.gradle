@@ -18,6 +18,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        all {
+            buildConfigField "String", "API_BASE_URL", "\"https://launchlibrary.net\""
+        }
     }
 }
 
@@ -26,6 +29,17 @@ dependencies {
     implementation project(':domain')
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Network
+    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
+    // DI
+    implementation "com.google.dagger:dagger:$daggerVersion"
+//    implementation "com.google.dagger:dagger-android-support:$daggerAdnroidVersion"
+//    implementation "javax.inject:javax.inject:$javaxVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     // Testing
     testImplementation "junit:junit:$junitVersion"
     testImplementation "com.android.support.test:runner:$runnerVersion"

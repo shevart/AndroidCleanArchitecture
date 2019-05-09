@@ -1,0 +1,10 @@
+package com.shevart.data.remote.impl.rest.api
+
+const val API_1_4 = "/1.4"
+
+const val LAUNCH_STATUS = "/launchstatus"
+const val LAUNCH = "/launch"
+const val NEXT = "/next"
+const val PARAM = "?"
+const val COUNT_PARAM = "/{count}"
+const val COUNT_PARAM_NAME = "count"

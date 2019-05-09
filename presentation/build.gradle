@@ -19,6 +19,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        all {
+            useProguard false
+        }
     }
 }
 
@@ -40,13 +43,15 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     // Dagger
     implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerAdnroidVersion"
+//    implementation "com.google.dagger:dagger-android-support:$daggerAdnroidVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     // UI
     implementation "androidx.recyclerview:recyclerview:$recycleViewVersion"
     implementation "androidx.cardview:cardview:$cardViewVersion"
     implementation "pl.droidsonroids.gif:android-gif-drawable:$gifVersion"
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    implementation "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
 
     // Testing
     testImplementation "junit:junit:$junitVersion"

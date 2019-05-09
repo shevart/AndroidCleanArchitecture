@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.shevart.rocketlaunches.core.app.RocketLaunchesApp
@@ -55,6 +56,10 @@ abstract class BaseFragment : Fragment() {
         return (activity?.application as RocketLaunchesApp).getAppComponent()
     }
 
+    protected fun showToast(msg: String) {
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+    }
+
     protected fun defaultHandleException(e: Throwable) {
         RLogger.log(e)
     }
@@ -71,5 +76,4 @@ abstract class BaseFragment : Fragment() {
     protected fun Disposable.disposeOnDestroyView() = this.apply {
         onViewDestroyDisposables.add(this)
     }
-
 }

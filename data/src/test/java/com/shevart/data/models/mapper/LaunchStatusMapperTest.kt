@@ -1,26 +1,25 @@
 package com.shevart.data.models.mapper
 
-import com.shevart.data.models.LaunchStatus
-import com.shevart.domain.models.launch.StatusType
-import com.shevart.domain.models.launch.StatusType.*
+import com.shevart.data.models.ApiLaunchStatus
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_FAILURE_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_GO_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_HOLD_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_IN_FLIGHT_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_PARTIAL_FAILURE_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_SUCCESS_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_TBD_ID
+import com.shevart.domain.models.launch.LaunchStatus
+import com.shevart.domain.models.launch.LaunchStatus.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class LaunchStatusMapperTest {
-    @Test(expected = UnsupportedOperationException::class)
+    @Test(expected = NotImplementedError::class)
     fun `test - unsupported reverse single map`() {
         // prepare
         val mapper = createMapper()
         // perform
         mapper.reverseMap(LaunchingNow)
-    }
-
-    @Test(expected = UnsupportedOperationException::class)
-    fun `test - unsupported reverse list map`() {
-        // prepare
-        val mapper = createMapper()
-        // perform
-        mapper.reverseMapList(emptyList())
     }
 
     @Test
@@ -79,12 +78,12 @@ class LaunchStatusMapperTest {
         )
     }
 
-    private fun testMapper(sourceValue: LaunchStatus, expectedResult: StatusType) {
+    private fun testMapper(sourceValue: ApiLaunchStatus, expectedResult: LaunchStatus) {
         // prepare
         val mapper = createMapper()
 
         // perform
-        val result = mapper.map(sourceValue)
+        val result = mapper.map(sourceValue.id)
 
         // check
         assertEquals(expectedResult, result)
@@ -92,7 +91,7 @@ class LaunchStatusMapperTest {
 
     private fun createMapper() = LaunchStatusMapper()
 
-    private fun createLaunchStatus(id: Long) = LaunchStatus(
+    private fun createLaunchStatus(id: Int) = ApiLaunchStatus(
         id = id,
         name = "name_$id",
         description = "description_$id"

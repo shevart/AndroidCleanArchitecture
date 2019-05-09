@@ -1,13 +1,19 @@
 package com.shevart.data.models.mapper
 
-import com.shevart.data.models.LaunchStatus
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_FAILURE_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_GO_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_HOLD_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_IN_FLIGHT_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_PARTIAL_FAILURE_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_SUCCESS_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_TBD_ID
 import com.shevart.domain.contract.mapper.Mapper
-import com.shevart.domain.models.launch.StatusType
-import com.shevart.domain.models.launch.StatusType.*
+import com.shevart.domain.models.launch.LaunchStatus
+import com.shevart.domain.models.launch.LaunchStatus.*
 
-class LaunchStatusMapper : Mapper<LaunchStatus, StatusType>() {
-    override fun map(from: LaunchStatus): StatusType =
-        when(from.id) {
+class LaunchStatusMapper : Mapper<Int, LaunchStatus>() {
+    override fun map(from: Int): LaunchStatus =
+        when(from) {
             LAUNCH_GO_ID -> LaunchingNow
             LAUNCH_TBD_ID -> Scheduled
             LAUNCH_SUCCESS_ID -> Successfully
@@ -17,12 +23,4 @@ class LaunchStatusMapper : Mapper<LaunchStatus, StatusType>() {
             LAUNCH_PARTIAL_FAILURE_ID -> Canceled
             else -> Unknown
         }
-
-    override fun reverseMap(to: StatusType): LaunchStatus {
-        throw UnsupportedOperationException()
-    }
-
-    override fun reverseMapList(typeList: List<StatusType>): List<LaunchStatus> {
-        throw UnsupportedOperationException()
-    }
 }
