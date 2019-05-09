@@ -8,8 +8,8 @@ import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_IN_FLIGHT_ID
 import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_PARTIAL_FAILURE_ID
 import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_SUCCESS_ID
 import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_TBD_ID
-import com.shevart.domain.models.launch.StatusType
-import com.shevart.domain.models.launch.StatusType.*
+import com.shevart.domain.models.launch.LaunchStatus
+import com.shevart.domain.models.launch.LaunchStatus.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -78,7 +78,7 @@ class LaunchStatusMapperTest {
         )
     }
 
-    private fun testMapper(sourceValue: ApiLaunchStatus, expectedResult: StatusType) {
+    private fun testMapper(sourceValue: ApiLaunchStatus, expectedResult: LaunchStatus) {
         // prepare
         val mapper = createMapper()
 

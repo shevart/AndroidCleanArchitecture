@@ -17,7 +17,7 @@ ext {
 // Dependencies data
 ext {
     // kotlin
-    kotlin_ktx_version = '1.0.1'
+    kotlin_ktx_version = '1.0.2'
 
     // libs
     supportVersion = '27.1.1'
@@ -33,7 +33,7 @@ ext {
     rxBindingsVersion = '2.0.0'
 
     stethoVersion = '1.5.0'
-    okHttpVersion = '3.14.1'
+    okHttpVersion = '3.9.0'
     retrofitVersion = '2.3.0'
     gsonVersion = '2.8.4'
     stethoVersion = '1.5.0'

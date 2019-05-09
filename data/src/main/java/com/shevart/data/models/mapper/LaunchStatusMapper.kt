@@ -8,11 +8,11 @@ import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_PARTIAL_FAILURE_
 import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_SUCCESS_ID
 import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_TBD_ID
 import com.shevart.domain.contract.mapper.Mapper
-import com.shevart.domain.models.launch.StatusType
-import com.shevart.domain.models.launch.StatusType.*
+import com.shevart.domain.models.launch.LaunchStatus
+import com.shevart.domain.models.launch.LaunchStatus.*
 
-class LaunchStatusMapper : Mapper<Int, StatusType>() {
-    override fun map(from: Int): StatusType =
+class LaunchStatusMapper : Mapper<Int, LaunchStatus>() {
+    override fun map(from: Int): LaunchStatus =
         when(from) {
             LAUNCH_GO_ID -> LaunchingNow
             LAUNCH_TBD_ID -> Scheduled
