@@ -8,6 +8,8 @@ data class ApiLaunch(
     val id: Long,
     @SerializedName(NAME)
     val name: String,
+    @SerializedName(STATUS)
+    val status: Int,
     @SerializedName(VIDEO_URLS)
     val videoUrls: List<String>,
     @SerializedName(NET_DATE)

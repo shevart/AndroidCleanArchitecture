@@ -5,6 +5,7 @@ const val NAME = "id"
 const val DESCRIPTION = "description"
 const val TYPE_NAME = "typeName"
 const val COUNTRY_CODE = "countryCode"
+const val STATUS = "status"
 
 const val INFO_URL = "infoURL"
 const val WIKI_URL = "wikiURL"

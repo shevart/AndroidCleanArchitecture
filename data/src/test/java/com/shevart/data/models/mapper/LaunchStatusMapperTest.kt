@@ -14,20 +14,12 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class LaunchStatusMapperTest {
-    @Test(expected = UnsupportedOperationException::class)
+    @Test(expected = NotImplementedError::class)
     fun `test - unsupported reverse single map`() {
         // prepare
         val mapper = createMapper()
         // perform
         mapper.reverseMap(LaunchingNow)
-    }
-
-    @Test(expected = UnsupportedOperationException::class)
-    fun `test - unsupported reverse list map`() {
-        // prepare
-        val mapper = createMapper()
-        // perform
-        mapper.reverseMapList(emptyList())
     }
 
     @Test
@@ -91,7 +83,7 @@ class LaunchStatusMapperTest {
         val mapper = createMapper()
 
         // perform
-        val result = mapper.map(sourceValue)
+        val result = mapper.map(sourceValue.id)
 
         // check
         assertEquals(expectedResult, result)
@@ -99,7 +91,7 @@ class LaunchStatusMapperTest {
 
     private fun createMapper() = LaunchStatusMapper()
 
-    private fun createLaunchStatus(id: Long) = ApiLaunchStatus(
+    private fun createLaunchStatus(id: Int) = ApiLaunchStatus(
         id = id,
         name = "name_$id",
         description = "description_$id"

@@ -7,6 +7,7 @@ data class RocketLaunch(
     val name: String,
     val date: Date,
     val rocket: Rocket,
+    val status: StatusType,
     val missions: List<Mission>,
     val favorite: Boolean
 )
