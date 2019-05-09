@@ -19,7 +19,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         all {
-            buildConfigField "String", "API_BASE_URL", "\"https://launchlibrary.net/\""
+            buildConfigField "String", "API_BASE_URL", "\"https://launchlibrary.net\""
         }
     }
 }
