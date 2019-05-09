@@ -5,6 +5,7 @@ import com.shevart.data.models.mapper.RocketMapper
 import com.shevart.data.remote.RemoteDataProvider
 import com.shevart.data.remote.impl.rest.api.LaunchApi
 import com.shevart.data.remote.impl.rest.response.GetLaunchesResponse
+import com.shevart.data.util.convertLaunchesResult
 import com.shevart.domain.contract.data.PageResult
 import com.shevart.domain.models.launch.RocketLaunch
 import io.reactivex.Single
@@ -18,14 +19,5 @@ class NetworkProvider
 
     override fun getRocketLaunches(count: Int, offset: Int): Single<PageResult<RocketLaunch>> =
         launchApi.getLaunches(count)
-            .map(this::convertLaunchesResult)
-
-    private fun convertLaunchesResult(result: GetLaunchesResponse): PageResult<RocketLaunch> {
-        return PageResult(
-            items = launchMapper.mapList(result.launches),
-            count = result.count,
-            totalCount = result.total,
-            offset = result.offset
-        )
-    }
+            .map { it.convertLaunchesResult(launchMapper) }
 }
