@@ -114,6 +114,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
 
     private fun showContent() {
         ivLaunchesLoading.gone()
+        rvLaunches.visible()
         adapter.updateItems(getItems())
     }
 

@@ -6,6 +6,7 @@ import com.shevart.rocketlaunches.di.module.AppModule
 import com.shevart.rocketlaunches.di.module.CoreModule
 import com.shevart.rocketlaunches.di.module.ViewModelModule
 import com.shevart.rocketlaunches.di.module.usecase.LaunchesUseCaseModule
+import com.shevart.rocketlaunches.di.module.usecase.UILaunchesUseCaseModule
 import com.shevart.rocketlaunches.screen.home.favorites.FavoritesFragment
 import com.shevart.rocketlaunches.screen.home.host.MainActivity
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListFragment
@@ -23,7 +24,8 @@ import javax.inject.Singleton
         ApiModule::class,
         LocalModule::class,
         DataSourceModule::class,
-        DataSourceSectionModule::class
+        DataSourceSectionModule::class,
+        UILaunchesUseCaseModule::class
     ]
 )
 interface AppComponent {

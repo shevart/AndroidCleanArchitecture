@@ -18,10 +18,10 @@ class GetNextLaunchesPageUseCase
     private val appConfigProvider: AppConfigProvider,
     private val schedulerProvider: SchedulerProvider
 ) : LaunchesUseCase.GetNextLaunchesPage {
-    override fun execute(showedItems: Int) =
-        launchesSection.getLaunches(prepareRequest(showedItems))
-            .map(this::convertResult)
-            .subscribeOnIoObserveOnMain(schedulerProvider)
+    override fun execute(showedItems: Int) = launchesSection
+        .getLaunches(prepareRequest(showedItems))
+        .map(this::convertResult)
+        .subscribeOnIoObserveOnMain(schedulerProvider)
 
     private fun prepareRequest(showedItems: Int) = PageRequest(
         offset = showedItems,
@@ -30,6 +30,6 @@ class GetNextLaunchesPageUseCase
 
     private fun convertResult(result: PageResult<RocketLaunch>) = Result(
         launches = result.items,
-        hasMoreItems = (result.offset + result.count < result.totalCount)
+        hasMoreItems = (result.offset + result.count) < result.totalCount
     )
 }
