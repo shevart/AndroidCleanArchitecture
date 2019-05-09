@@ -2,7 +2,7 @@ package com.shevart.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class LaunchLocation(
+data class ApiLaunchLocation(
     @SerializedName(ID)
     val id: Long,
     @SerializedName(NAME)

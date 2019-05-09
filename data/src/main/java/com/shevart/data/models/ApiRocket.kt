@@ -2,7 +2,7 @@ package com.shevart.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Rocket(
+data class ApiRocket(
     @SerializedName(ID)
     val id: Long,
     @SerializedName(NAME)
@@ -12,7 +12,7 @@ data class Rocket(
     @SerializedName(FAMILY_NAME)
     val familyName: String,
     @SerializedName(AGENCIES)
-    val agencies: List<Agency>,
+    val agencies: List<ApiAgency>,
     @SerializedName(WIKI_URL)
     val wikiURL: String,
     @SerializedName(INFO_URLS)

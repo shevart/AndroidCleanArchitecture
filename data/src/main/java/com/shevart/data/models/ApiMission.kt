@@ -2,7 +2,7 @@ package com.shevart.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Mission(
+data class ApiMission(
     @SerializedName(ID)
     val id: Long,
     @SerializedName(NAME)
@@ -16,5 +16,5 @@ data class Mission(
     @SerializedName(TYPE_NAME)
     val typeName: String,
     @SerializedName(AGENCIES)
-    val agencies: List<Agency>
+    val agencies: List<ApiAgency>
 )

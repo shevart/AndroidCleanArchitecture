@@ -3,7 +3,7 @@ package com.shevart.data.models
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class Launch(
+data class ApiLaunch(
     @SerializedName(ID)
     val id: Long,
     @SerializedName(NAME)
@@ -13,9 +13,9 @@ data class Launch(
     @SerializedName(NET_DATE)
     val netDate: Date,
     @SerializedName(ROCKET)
-    val rocket: Rocket,
+    val rocket: ApiRocket,
     @SerializedName(MISSIONS)
-    val missions: List<Mission>,
+    val missions: List<ApiMission>,
     @SerializedName(LAUNCH_SERVICE_PROVIDER)
-    val launchServiceProvider: LaunchServiceProvider
+    val launchServiceProvider: ApiLaunchServiceProvider
 )

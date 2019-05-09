@@ -1,6 +1,6 @@
 package com.shevart.data.models
 
-data class LaunchStatus(
+data class ApiLaunchStatus(
     val id: Long,
     val name: String,
     val description: String

@@ -5,7 +5,7 @@ import com.shevart.data.models.*
 
 data class GetLaunchStatusesResponse(
     @SerializedName(TYPES)
-    val statuses: List<LaunchStatus>,
+    val statuses: List<ApiLaunchStatus>,
     @SerializedName(TOTAL)
     val total: Int,
     @SerializedName(COUNT)

@@ -18,5 +18,5 @@ data class LocationPad(
     @SerializedName(LONGITUDE)
     val longitude: Double,
     @SerializedName(AGENCIES)
-    val agencies: List<Agency>
+    val agencies: List<ApiAgency>
 )

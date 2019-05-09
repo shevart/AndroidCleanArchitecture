@@ -1,13 +1,13 @@
 package com.shevart.data.models.mapper
 
-import com.shevart.data.models.LaunchStatus
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_FAILURE_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_GO_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_HOLD_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_IN_FLIGHT_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_PARTIAL_FAILURE_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_SUCCESS_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_TBD_ID
+import com.shevart.data.models.ApiLaunchStatus
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_FAILURE_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_GO_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_HOLD_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_IN_FLIGHT_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_PARTIAL_FAILURE_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_SUCCESS_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_TBD_ID
 import com.shevart.domain.models.launch.StatusType
 import com.shevart.domain.models.launch.StatusType.*
 import org.junit.Assert.assertEquals
@@ -86,7 +86,7 @@ class LaunchStatusMapperTest {
         )
     }
 
-    private fun testMapper(sourceValue: LaunchStatus, expectedResult: StatusType) {
+    private fun testMapper(sourceValue: ApiLaunchStatus, expectedResult: StatusType) {
         // prepare
         val mapper = createMapper()
 
@@ -99,7 +99,7 @@ class LaunchStatusMapperTest {
 
     private fun createMapper() = LaunchStatusMapper()
 
-    private fun createLaunchStatus(id: Long) = LaunchStatus(
+    private fun createLaunchStatus(id: Long) = ApiLaunchStatus(
         id = id,
         name = "name_$id",
         description = "description_$id"

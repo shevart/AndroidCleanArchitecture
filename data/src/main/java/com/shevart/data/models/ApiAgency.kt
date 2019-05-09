@@ -2,7 +2,7 @@ package com.shevart.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Agency(
+data class ApiAgency(
     @SerializedName(ID)
     val id: Long,
     @SerializedName(NAME)

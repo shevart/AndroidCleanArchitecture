@@ -1,19 +1,19 @@
 package com.shevart.data.models.mapper
 
-import com.shevart.data.models.LaunchStatus
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_FAILURE_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_GO_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_HOLD_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_IN_FLIGHT_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_PARTIAL_FAILURE_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_SUCCESS_ID
-import com.shevart.data.models.LaunchStatus.Companion.LAUNCH_TBD_ID
+import com.shevart.data.models.ApiLaunchStatus
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_FAILURE_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_GO_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_HOLD_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_IN_FLIGHT_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_PARTIAL_FAILURE_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_SUCCESS_ID
+import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_TBD_ID
 import com.shevart.domain.contract.mapper.Mapper
 import com.shevart.domain.models.launch.StatusType
 import com.shevart.domain.models.launch.StatusType.*
 
-class LaunchStatusMapper : Mapper<LaunchStatus, StatusType>() {
-    override fun map(from: LaunchStatus): StatusType =
+class LaunchStatusMapper : Mapper<ApiLaunchStatus, StatusType>() {
+    override fun map(from: ApiLaunchStatus): StatusType =
         when(from.id) {
             LAUNCH_GO_ID -> LaunchingNow
             LAUNCH_TBD_ID -> Scheduled
@@ -25,11 +25,11 @@ class LaunchStatusMapper : Mapper<LaunchStatus, StatusType>() {
             else -> Unknown
         }
 
-    override fun reverseMap(to: StatusType): LaunchStatus {
+    override fun reverseMap(to: StatusType): ApiLaunchStatus {
         throw UnsupportedOperationException()
     }
 
-    override fun reverseMapList(typeList: List<StatusType>): List<LaunchStatus> {
+    override fun reverseMapList(typeList: List<StatusType>): List<ApiLaunchStatus> {
         throw UnsupportedOperationException()
     }
 }
