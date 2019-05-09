@@ -33,9 +33,10 @@ ext {
     rxBindingsVersion = '2.0.0'
 
     stethoVersion = '1.5.0'
-    okHttpVersion = '3.9.0'
+    okHttpVersion = '3.14.1'
     retrofitVersion = '2.3.0'
     gsonVersion = '2.8.4'
+    stethoVersion = '1.5.0'
 
     daggerVersion = '2.14.1'
     daggerAdnroidVersion = '2.15'
