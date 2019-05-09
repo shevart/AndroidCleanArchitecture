@@ -14,5 +14,5 @@ data class ApiLaunchLocation(
     @SerializedName(COUNTRY_CODE)
     val countryCode: String,
     @SerializedName(PADS)
-    val pads: List<LocationPad>
+    val pads: List<ApiLocationPad>
 )

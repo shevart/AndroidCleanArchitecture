@@ -2,7 +2,7 @@ package com.shevart.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class LocationPad(
+data class ApiLocationPad(
     @SerializedName(ID)
     val id: Long,
     @SerializedName(NAME)
