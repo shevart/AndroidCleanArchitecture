@@ -14,11 +14,11 @@ data class ApiRocket(
     @SerializedName(AGENCIES)
     val agencies: List<ApiAgency>,
     @SerializedName(WIKI_URL)
-    val wikiURL: String,
+    val wikiURL: String?,
     @SerializedName(INFO_URLS)
     val infoUrls: List<String>,
     @SerializedName(INFO_URL)
-    val infoURL: String,
+    val infoURL: String?,
     @SerializedName(IMAGE_SIZES)
     val imageSizes: List<Int>,
     @SerializedName(IMAGE_URL)

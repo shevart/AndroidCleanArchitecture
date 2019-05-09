@@ -7,8 +7,8 @@ import com.shevart.domain.models.launch.MediaInfo
 class LaunchServiceProviderMediaInfoMapper : Mapper<ApiLaunchServiceProvider, MediaInfo>() {
     override fun map(from: ApiLaunchServiceProvider) =
         MediaInfo(
-            infoLink = from.infoUrl,
-            wikiLink = from.wikiUrl,
+            infoLink = from.infoUrl ?: "",
+            wikiLink = from.wikiUrl ?: "",
             infoLinks = from.infoUrls
         )
 }

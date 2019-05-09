@@ -11,8 +11,8 @@ class RocketMediaInfoMapper(
 ) : Mapper<ApiRocket, MediaInfo>() {
     override fun map(from: ApiRocket) =
         MediaInfo(
-            infoLink = from.infoURL,
-            wikiLink = from.wikiURL,
+            infoLink = from.infoURL ?: "",
+            wikiLink = from.wikiURL ?: "",
             infoLinks = from.infoUrls,
             images = obtainImages(from, imageMapper)
         )

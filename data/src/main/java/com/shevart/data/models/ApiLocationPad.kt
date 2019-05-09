@@ -8,11 +8,11 @@ data class ApiLocationPad(
     @SerializedName(NAME)
     val name: String,
     @SerializedName(INFO_URL)
-    val infoURL: String,
+    val infoURL: String?,
     @SerializedName(WIKI_URL)
-    val wikiURL: String,
+    val wikiURL: String?,
     @SerializedName(MAP_URL)
-    val mapURL: String,
+    val mapURL: String?,
     @SerializedName(LATITUDE)
     val latitude: Double,
     @SerializedName(LONGITUDE)

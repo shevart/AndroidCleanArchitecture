@@ -12,7 +12,7 @@ data class ApiMission(
     @SerializedName(TYPE)
     val type: Int,
     @SerializedName(WIKI_URL)
-    val wikiUrl: String,
+    val wikiUrl: String?,
     @SerializedName(TYPE_NAME)
     val typeName: String,
     @SerializedName(AGENCIES)

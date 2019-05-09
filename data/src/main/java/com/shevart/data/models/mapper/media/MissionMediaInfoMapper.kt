@@ -7,6 +7,6 @@ import com.shevart.domain.models.launch.MediaInfo
 class MissionMediaInfoMapper : Mapper<ApiMission, MediaInfo>() {
     override fun map(from: ApiMission) =
         MediaInfo(
-            wikiLink = from.wikiUrl
+            wikiLink = from.wikiUrl ?: ""
         )
 }

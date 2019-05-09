@@ -1,7 +1,7 @@
 package com.shevart.data.models
 
 const val ID = "id"
-const val NAME = "id"
+const val NAME = "name"
 const val DESCRIPTION = "description"
 const val TYPE_NAME = "typeName"
 const val COUNTRY_CODE = "countryCode"
@@ -33,6 +33,7 @@ const val FAMILY_NAME = "familyname"
 const val IMAGE_SIZES = "imageSizes"
 
 const val TYPES = "types"
+const val LAUNCHES = "launches"
 
 const val TOTAL = "total"
 const val COUNT = "count"

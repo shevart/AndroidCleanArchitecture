@@ -10,7 +10,7 @@ class ImageMapper : Mapper<SourceData, List<Image>>() {
     }
 
     private fun createImage(link: String, resolution: Int) =
-            String.format(link, resolution)
+        String.format(link, resolution)
 
     class SourceData(
         val link: String,

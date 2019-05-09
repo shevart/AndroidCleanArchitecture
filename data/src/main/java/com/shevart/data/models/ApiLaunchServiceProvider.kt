@@ -14,9 +14,9 @@ data class ApiLaunchServiceProvider(
     @SerializedName(TYPE)
     val type: Int,
     @SerializedName(INFO_URL)
-    val infoUrl: String,
+    val infoUrl: String?,
     @SerializedName(WIKI_URL)
-    val wikiUrl: String,
+    val wikiUrl: String?,
     @SerializedName(INFO_URLS)
     val infoUrls: List<String>
 )

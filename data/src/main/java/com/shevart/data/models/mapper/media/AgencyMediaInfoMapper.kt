@@ -7,8 +7,8 @@ import com.shevart.domain.models.launch.MediaInfo
 class AgencyMediaInfoMapper : Mapper<ApiAgency, MediaInfo>() {
     override fun map(from: ApiAgency) =
         MediaInfo(
-            infoLink = from.infoUrl,
-            wikiLink = from.wikiUrl,
+            infoLink = from.infoUrl ?: "",
+            wikiLink = from.wikiUrl ?: "",
             infoLinks = from.infoUrls,
             images = emptyList()
         )

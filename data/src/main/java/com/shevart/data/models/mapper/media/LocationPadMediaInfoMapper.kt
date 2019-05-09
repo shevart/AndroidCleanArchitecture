@@ -7,8 +7,8 @@ import com.shevart.domain.models.launch.MediaInfo
 class LocationPadMediaInfoMapper : Mapper<ApiLocationPad, MediaInfo>() {
     override fun map(from: ApiLocationPad) =
         MediaInfo(
-            infoLink = from.infoURL,
-            wikiLink = from.wikiURL,
-            mapLink = from.mapURL
+            infoLink = from.infoURL ?: "",
+            wikiLink = from.wikiURL ?: "",
+            mapLink = from.mapURL ?: ""
         )
 }

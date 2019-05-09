@@ -8,9 +8,9 @@ data class ApiLaunchLocation(
     @SerializedName(NAME)
     val name: String,
     @SerializedName(INFO_URL)
-    val infoURL: String,
+    val infoURL: String?,
     @SerializedName(WIKI_URL)
-    val wikiURL: String,
+    val wikiURL: String?,
     @SerializedName(COUNTRY_CODE)
     val countryCode: String,
     @SerializedName(PADS)
