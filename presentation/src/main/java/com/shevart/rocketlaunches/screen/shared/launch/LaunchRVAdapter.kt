@@ -9,15 +9,55 @@ import com.shevart.rocketlaunches.R
 import com.shevart.rocketlaunches.base.adapter.BaseRVAdapter
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.customview.launchstatus.LaunchStatusView
-import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter.LaunchViewHolder
 import com.shevart.rocketlaunches.util.ui.loadInto
 
-class LaunchRVAdapter : BaseRVAdapter<UILaunch, LaunchViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LaunchViewHolder {
-        return LaunchViewHolder(inflate(parent, R.layout.item_rocket_launch))
+class LaunchRVAdapter : BaseRVAdapter<UILaunch, RecyclerView.ViewHolder>() {
+    // I prefer use special UI models for loaders like this, but I have no time for do it.
+    private var showLoadingBottomItem = false
+
+    override fun getItemCount(): Int {
+        return if (showLoadingBottomItem && super.getItemCount() > 0) {
+            super.getItemCount() + 1
+        } else {
+            super.getItemCount()
+        }
     }
 
-    override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
+    override fun getItemViewType(position: Int): Int {
+        return if (showLoadingBottomItem && position == (itemCount - 1)) {
+            LOADING_ITEM_VIEW_TYPE
+        } else {
+            RECORD_VIEW_TYPE
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+        when (viewType) {
+            RECORD_VIEW_TYPE -> {
+                LaunchViewHolder(inflate(parent, R.layout.item_rocket_launch))
+            }
+            LOADING_ITEM_VIEW_TYPE -> {
+                BottomLoadingViewHolder(inflate(parent, R.layout.item_progress_bottom))
+            }
+            else -> throwCreateViewHolderIllegalViewType(viewType)
+        }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is LaunchViewHolder) {
+            bindLaunchItem(holder, position)
+        } else {
+            // do nothing
+        }
+    }
+
+    fun setShowLoadingBottomItem(showLoadingBottomItem: Boolean, refreshData: Boolean = true) {
+        this.showLoadingBottomItem = showLoadingBottomItem
+        if (refreshData) {
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun bindLaunchItem(holder: LaunchViewHolder, position: Int) {
         val item = getItem(position)
         holder.ivRocketLaunchItemFlag.setImageResource(item.countryFlagResId)
         holder.tvRocketLaunchItemCountry.setText(item.countryNameResId)
@@ -28,6 +68,8 @@ class LaunchRVAdapter : BaseRVAdapter<UILaunch, LaunchViewHolder>() {
         holder.svRocketLaunchItemStatus.setStatusBg(item.status.backgroundResId)
         if (item.imageUrl != null) {
             holder.ivRocketLaunchItemCover.loadInto(item.imageUrl)
+        } else {
+            holder.ivRocketLaunchItemCover.setImageResource(R.drawable.rocket_list_default)
         }
     }
 
@@ -50,5 +92,12 @@ class LaunchRVAdapter : BaseRVAdapter<UILaunch, LaunchViewHolder>() {
             tvRocketLaunchItemDate = itemView.findViewById(R.id.tvRocketLaunchItemDate)
             svRocketLaunchItemStatus = itemView.findViewById(R.id.svRocketLaunchItemStatus)
         }
+    }
+
+    class BottomLoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    private companion object {
+        private const val RECORD_VIEW_TYPE = 1
+        private const val LOADING_ITEM_VIEW_TYPE = 2
     }
 }

@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:src="@drawable/rocket_list_default"
         android:contentDescription="@string/rocket_launch_image_description"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        tools:src="@drawable/rocket_list_default" />
 
     <View
         android:layout_width="match_parent"
