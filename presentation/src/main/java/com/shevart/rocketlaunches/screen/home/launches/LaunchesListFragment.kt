@@ -5,31 +5,31 @@ import android.view.View
 import androidx.core.view.postDelayed
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionManager
-import com.shevart.data.remote.RemoteDataProvider
-
 import com.shevart.rocketlaunches.R
 import com.shevart.rocketlaunches.base.mvvm.AbsMvvmFragment
 import com.shevart.rocketlaunches.di.component.AppComponent
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.models.UILaunchStatus
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State
-import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.Error
-import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.Loading
-import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.ShowLaunchesList
+import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.*
 import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter
 import com.shevart.rocketlaunches.util.observeLiveDataForceNonNull
-import com.shevart.rocketlaunches.util.subscribeOnIoObserveOnMain
+import com.shevart.rocketlaunches.util.ui.ListScrollItemListener
 import com.shevart.rocketlaunches.util.ui.gone
 import com.shevart.rocketlaunches.util.ui.textColorByColorId
 import com.shevart.rocketlaunches.util.ui.visible
 import kotlinx.android.synthetic.main.fragment_launches_list.*
-import javax.inject.Inject
 
 class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
     private lateinit var adapter: LaunchRVAdapter
 
-    @Inject
-    lateinit var networkProvide: RemoteDataProvider
+    private val pagingListEndReachedListener: ListScrollItemListener by lazy {
+        object : ListScrollItemListener(rvLaunches.layoutManager!!) {
+            override fun onEndListReached() {
+                viewModel.onListEndReached()
+            }
+        }
+    }
 
     override fun provideLayoutResId() = R.layout.fragment_launches_list
 
@@ -43,7 +43,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         adapter = LaunchRVAdapter()
         rvLaunches.layoutManager = LinearLayoutManager(requireContext())
         rvLaunches.adapter = adapter
-
+        rvLaunches.addOnScrollListener(pagingListEndReachedListener)
 
         observeLiveDataForceNonNull(viewModel.getStateLiveData(), this::renderState)
 
@@ -64,19 +64,6 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         evLaunchesError.setImage(R.drawable.error_no_internet)
         evLaunchesError.setTitle(R.string.error_no_internet)
         evLaunchesError.setDescription(R.string.error_no_internet)
-
-        networkProvide.getRocketLaunches(1)
-            .subscribeOnIoObserveOnMain()
-            .subscribe(
-                {
-                    showToast("it.count = ${it.count}")
-                },
-                {
-                    it.printStackTrace()
-                    showToast(it.localizedMessage)
-                }
-            )
-            .disposeOnDestroyView()
     }
 
     private fun renderState(state: State) {

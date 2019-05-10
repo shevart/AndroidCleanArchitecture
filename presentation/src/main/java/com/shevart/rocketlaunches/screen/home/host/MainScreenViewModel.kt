@@ -14,11 +14,15 @@ class MainScreenViewModel
     }
 
     fun showLaunchesScreen() {
-        updateState(currentState.copy(screen = LaunchesScreen))
+        if (currentState.screen != LaunchesScreen) {
+            updateState(currentState.copy(screen = LaunchesScreen))
+        }
     }
 
     fun showFavorites() {
-        updateState(currentState.copy(screen = FavoritesScreen))
+        if (currentState.screen != FavoritesScreen) {
+            updateState(currentState.copy(screen = FavoritesScreen))
+        }
     }
 
     sealed class Event
