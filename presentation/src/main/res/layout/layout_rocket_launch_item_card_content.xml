@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:contentDescription="@string/rocket_launch_image_description"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        tools:src="@drawable/rocket_list_default" />
 
     <View
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
 
         <ImageView
             android:id="@+id/ivRocketLaunchItemFlag"
-            android:layout_width="36dp"
+            android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"

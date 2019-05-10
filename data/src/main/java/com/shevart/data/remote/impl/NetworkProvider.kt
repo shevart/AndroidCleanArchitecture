@@ -23,6 +23,6 @@ class NetworkProvider
 ) : RemoteDataProvider {
     override fun getRocketLaunches(count: Int, offset: Int): Single<PageResult<RocketLaunch>> =
         launchApi
-            .getLaunches(count)
+            .getLaunches(count, offset)
             .map { it.convertLaunchesResult(launchMapper) }
 }

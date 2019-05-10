@@ -9,32 +9,68 @@ import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Sta
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.ShowLaunchesList
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase.GetNextUILaunchesPage.UIResult
+import com.shevart.rocketlaunches.util.plus
 import javax.inject.Inject
 
 class LaunchesListViewModel
 @Inject constructor(
     private val getNextLaunchesPageUseCase: UILaunchesUseCase.GetNextUILaunchesPage
 ) : AbsStateViewModel<State, Event>() {
+    private var nextPageLoadingNow = false
+
     init {
         updateState(Loading)
         loadFirstPage()
     }
 
+    fun onListEndReached() {
+        val state = currentState as? ShowLaunchesList
+        // Why I use named variable for if statement? - for simplify readability.
+        // I don't like use methods for such actions because there is one goal for this
+        // statement - well readable name of condition. And variable covers it
+        val loadNextPage = state?.showBottomListLoadingIndicator == true && !nextPageLoadingNow
+        if (loadNextPage) {
+            loadNextPage(state!!.launchesItems.size)
+        }
+    }
+
     private fun loadFirstPage() {
-        getNextLaunchesPageUseCase.execute(0)
+        getNextLaunchesPageUseCase.execute(showedItems = 0)
             .subscribe(
-                this::onPageLoaded,
+                this::onFirstPageLoaded,
                 this::onPageLoadingFailed
             )
             .addToClearedDisposable()
     }
 
-    private fun onPageLoaded(pageResult: UIResult) {
+    private fun onFirstPageLoaded(pageResult: UIResult) {
         updateState(stateForFirstLoadedPage(pageResult))
+    }
+
+    private fun loadNextPage(showedItems: Int) {
+        nextPageLoadingNow = true
+        getNextLaunchesPageUseCase.execute(showedItems)
+            .subscribe(
+                this::onNextPageLoaded,
+                this::onPageLoadingFailed
+            )
+            .addToClearedDisposable()
+    }
+
+    private fun onNextPageLoaded(pageResult: UIResult) {
+        nextPageLoadingNow = false
+        val state = currentState as? ShowLaunchesList
+        if (state == null) {
+            // interesting case
+            onFirstPageLoaded(pageResult)
+            return
+        }
+        updateState(state.addPage(pageResult))
     }
 
     private fun onPageLoadingFailed(e: Throwable) {
         // todo show error
+        nextPageLoadingNow = false
         defaultHandleException(e)
     }
 
@@ -60,5 +96,10 @@ class LaunchesListViewModel
                 launchesItems = pageResult.launches,
                 showBottomListLoadingIndicator = pageResult.hasMoreItems
             )
+
+        fun ShowLaunchesList.addPage(pageResult: UIResult) = this.copy(
+            launchesItems = this.launchesItems.plus(pageResult.launches),
+            showBottomListLoadingIndicator = pageResult.hasMoreItems
+        )
     }
 }
