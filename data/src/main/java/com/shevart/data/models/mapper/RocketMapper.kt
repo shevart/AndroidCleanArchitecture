@@ -8,6 +8,7 @@ import com.shevart.domain.contract.mapper.Mapper
 import com.shevart.domain.models.launch.Agency
 import com.shevart.domain.models.launch.MediaInfo
 import com.shevart.domain.models.launch.Rocket
+import com.shevart.domain.util.mapOrNull
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -22,7 +23,7 @@ class RocketMapper
         Rocket(
             id = from.id,
             name = from.name,
-            agency = agencyMapper.map(from.agencies.first()),
+            agency = agencyMapper.mapOrNull(from.agencies?.firstOrNull()),
             mediaInfo = rocketMediaInfoMapper.map(from)
         )
 }

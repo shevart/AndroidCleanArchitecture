@@ -8,9 +8,9 @@ import io.reactivex.Single
  */
 interface UILaunchesUseCase {
     interface GetNextUILaunchesPage {
-        fun execute(showedItems: Int): Single<Result>
+        fun execute(showedItems: Int): Single<UIResult>
 
-        data class Result(
+        data class UIResult(
             val launches: List<UILaunch>,
             val hasMoreItems: Boolean
         )

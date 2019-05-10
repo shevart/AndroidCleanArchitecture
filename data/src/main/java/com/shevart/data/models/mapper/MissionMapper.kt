@@ -8,6 +8,7 @@ import com.shevart.domain.contract.mapper.Mapper
 import com.shevart.domain.models.launch.Agency
 import com.shevart.domain.models.launch.MediaInfo
 import com.shevart.domain.models.launch.Mission
+import com.shevart.domain.util.mapListOrEmpty
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -25,7 +26,7 @@ class MissionMapper
             description = from.description,
             type = from.type,
             typeName = from.typeName,
-            agencies = agencyMapper.mapList(from.agencies),
+            agencies = agencyMapper.mapListOrEmpty(from.agencies),
             mediaInfo = mediaInfoMapper.map(from)
         )
 }

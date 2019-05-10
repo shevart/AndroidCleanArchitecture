@@ -27,9 +27,18 @@ class LaunchMapper
             name = from.name,
             date = from.netDate,
             status = statusMapper.map(from.status),
-            country = countryMapper.map(from.rocket.agencies.first().countryCode),
+            country = from.getCountry(),
             rocket = rocketMapper.map(from.rocket),
             missions = missionMapper.mapList(from.missions),
             favorite = false
         )
+
+    private fun ApiLaunch.getCountry(): Country {
+        val agencyCountry = rocket.agencies?.firstOrNull()
+        if (agencyCountry != null) {
+            return countryMapper.map(agencyCountry.countryCode)
+        }
+
+        return countryMapper.map(this.launchServiceProvider.countryCode)
+    }
 }

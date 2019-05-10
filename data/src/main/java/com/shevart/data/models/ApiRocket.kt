@@ -12,7 +12,7 @@ data class ApiRocket(
     @SerializedName(FAMILY_NAME)
     val familyName: String,
     @SerializedName(AGENCIES)
-    val agencies: List<ApiAgency>,
+    val agencies: List<ApiAgency>?,
     @SerializedName(WIKI_URL)
     val wikiURL: String?,
     @SerializedName(INFO_URLS)

@@ -48,6 +48,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         observeLiveDataForceNonNull(viewModel.getStateLiveData(), this::renderState)
 
         // todo remove after test
+        if (true) return
         rvLaunches.postDelayed(2000L) {
             TransitionManager.beginDelayedTransition(flLaunchesRoot)
             evLaunchesError.gone()

@@ -4,20 +4,31 @@ import com.shevart.domain.contract.mapper.Mapper
 import com.shevart.domain.contract.scheduler.SchedulerProvider
 import com.shevart.domain.models.launch.RocketLaunch
 import com.shevart.domain.usecase.contract.LaunchesUseCase
+import com.shevart.domain.usecase.contract.LaunchesUseCase.GetNextLaunchesPage.Result
+import com.shevart.domain.util.subscribeOnIoObserveOnMain
+import com.shevart.rocketlaunches.di.name.UIMapperNames
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
-import com.shevart.rocketlaunches.usecase.UILaunchesUseCase.GetNextUILaunchesPage.Result
-import io.reactivex.Single
+import com.shevart.rocketlaunches.usecase.UILaunchesUseCase.GetNextUILaunchesPage.UIResult
 import javax.inject.Inject
+import javax.inject.Named
 
 class GetNextUILaunchesPageUseCase
 @Inject constructor(
     private val getNextLaunchesPageUseCase: LaunchesUseCase.GetNextLaunchesPage,
-    private val schedulerProvider: SchedulerProvider
+    private val schedulerProvider: SchedulerProvider,
+    @Named(UIMapperNames.UI_MAPPER_LAUNCH)
+    private val launchesMapper: Mapper<RocketLaunch, UILaunch>
 ) : UILaunchesUseCase.GetNextUILaunchesPage {
-    private val launchesMapper: Mapper<RocketLaunch, UILaunch> = TODO()
+    override fun execute(showedItems: Int) =
+        getNextLaunchesPageUseCase.execute(showedItems)
+            .map(this::mapResult)
+            .subscribeOnIoObserveOnMain(schedulerProvider)
 
-    override fun execute(showedItems: Int): Single<Result> {
-        TODO()
+    private fun mapResult(result: Result): UIResult {
+        return UIResult(
+            launches = launchesMapper.mapList(result.launches),
+            hasMoreItems = result.hasMoreItems
+        )
     }
 }
