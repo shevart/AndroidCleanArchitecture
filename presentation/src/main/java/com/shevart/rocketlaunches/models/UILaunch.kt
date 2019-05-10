@@ -13,5 +13,4 @@ data class UILaunch(
     val date: String,
     val status: UILaunchStatus,
     val imageUrl: String? = null
-
 )

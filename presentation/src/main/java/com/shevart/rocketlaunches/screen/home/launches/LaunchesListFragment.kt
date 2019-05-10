@@ -166,7 +166,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
             date = "12.22.1999",
             status = UILaunchStatus(
                 statusResId = R.string.launch_status_canceled,
-                backgroundResId = R.drawable.gradient_status_grey
+                backgroundResId = R.drawable.gradient_status_grey_light
             )
         )
     )

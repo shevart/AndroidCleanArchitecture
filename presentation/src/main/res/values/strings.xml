@@ -3,10 +3,13 @@
     <string name="launches">Launches</string>
     <string name="favorites">Favorites</string>
 
+    <string name="launch_status_launching_now">Launching now</string>
     <string name="launch_status_successfully">Successfully</string>
     <string name="launch_status_failed">Failed</string>
+    <string name="launch_status_in_flight">In flight</string>
     <string name="launch_status_canceled">Canceled</string>
     <string name="launch_status_scheduled">Scheduled</string>
+    <string name="launch_status_hold">Hold</string>
     <string name="launch_status_unknown">Unknown</string>
 
     <string name="error_no_internet">No internet connection!</string>
