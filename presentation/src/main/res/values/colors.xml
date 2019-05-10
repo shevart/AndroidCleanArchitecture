@@ -14,6 +14,8 @@
 
     <color name="statusGreenStart">#7ab402</color>
     <color name="statusGreenEnd">#4eba1a</color>
+    <color name="statusGreenLightStart">#11998e</color>
+    <color name="statusGreenLightEnd">#38ef7d</color>
     <color name="statusRedStart">#FF416C</color>
     <color name="statusRedEnd">#FF4B2B</color>
     <color name="statusBlueStart">#56CCF2</color>

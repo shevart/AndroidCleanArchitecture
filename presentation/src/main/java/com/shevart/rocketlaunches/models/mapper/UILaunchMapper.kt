@@ -13,6 +13,7 @@ import com.shevart.rocketlaunches.models.UILaunchStatus
 import com.shevart.rocketlaunches.util.ui.getCountryFlagResId
 import com.shevart.rocketlaunches.util.ui.getCountryNameResId
 import com.shevart.rocketlaunches.util.ui.getFavoriteResId
+import com.shevart.rocketlaunches.util.ui.toShortStr
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -30,7 +31,7 @@ class UILaunchMapper
             countryFlagResId = resourceProvider.getCountryFlagResId(from.country),
             countryNameResId = stringProvider.getCountryNameResId(from.country),
             favoritesIconResId = resourceProvider.getFavoriteResId(from.favorite),
-            date = from.date.toString(), // todo map date
+            date = from.date.toShortStr(),
             status = launchStatusMapper.map(from.status),
             imageUrl = from.rocket.mediaInfo.obtainImageUrl()
         )

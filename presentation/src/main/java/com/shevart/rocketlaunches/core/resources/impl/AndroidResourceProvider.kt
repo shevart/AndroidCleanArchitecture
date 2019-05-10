@@ -11,7 +11,7 @@ class AndroidResourceProvider
     override val statusFailedBg = R.drawable.gradient_status_red
     override val statusInFlightBg = R.drawable.gradient_status_blue
     override val statusCanceledBg = R.drawable.gradient_status_grey
-    override val statusScheduledBg = R.drawable.gradient_status_grey_light
+    override val statusScheduledBg = R.drawable.gradient_status_green_light
     override val statusHoldBg = R.drawable.gradient_status_grey_light
     override val statusUnknownBg = R.drawable.gradient_status_grey
 
