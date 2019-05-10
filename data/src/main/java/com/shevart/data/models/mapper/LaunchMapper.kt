@@ -1,5 +1,6 @@
 package com.shevart.data.models.mapper
 
+import com.shevart.data.di.name.DataMapperName
 import com.shevart.data.models.ApiLaunch
 import com.shevart.data.models.ApiMission
 import com.shevart.data.models.ApiRocket
@@ -8,11 +9,17 @@ import com.shevart.domain.models.launch.Mission
 import com.shevart.domain.models.launch.Rocket
 import com.shevart.domain.models.launch.RocketLaunch
 import com.shevart.domain.models.launch.LaunchStatus
+import javax.inject.Inject
+import javax.inject.Named
 
-class LaunchMapper(
-    private val rocketMapper: Mapper<ApiRocket, Rocket> = RocketMapper(),
-    private val missionMapper: Mapper<ApiMission, Mission> = MissionMapper(),
-    private val statusMapper: Mapper<Int, LaunchStatus> = LaunchStatusMapper()
+class LaunchMapper
+@Inject constructor(
+    @Named(DataMapperName.DATA_MAPPER_ROCKET)
+    private val rocketMapper: Mapper<ApiRocket, Rocket>,
+    @Named(DataMapperName.DATA_MAPPER_MISSION)
+    private val missionMapper: Mapper<ApiMission, Mission>,
+    @Named(DataMapperName.DATA_MAPPER_LAUNCH_STATUS)
+    private val statusMapper: Mapper<Int, LaunchStatus>
 ) : Mapper<ApiLaunch, RocketLaunch>() {
     override fun map(from: ApiLaunch) =
         RocketLaunch(

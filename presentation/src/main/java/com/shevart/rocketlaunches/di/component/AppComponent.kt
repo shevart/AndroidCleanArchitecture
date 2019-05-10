@@ -5,7 +5,7 @@ import com.shevart.rocketlaunches.core.app.RocketLaunchesApp
 import com.shevart.rocketlaunches.di.module.AppModule
 import com.shevart.rocketlaunches.di.module.CoreModule
 import com.shevart.rocketlaunches.di.module.ViewModelModule
-import com.shevart.rocketlaunches.di.module.data.MapperModule
+import com.shevart.rocketlaunches.di.module.data.UIMapperModule
 import com.shevart.rocketlaunches.di.module.usecase.LaunchesUseCaseModule
 import com.shevart.rocketlaunches.di.module.usecase.UILaunchesUseCaseModule
 import com.shevart.rocketlaunches.screen.home.favorites.FavoritesFragment
@@ -27,7 +27,8 @@ import javax.inject.Singleton
         DataSourceModule::class,
         DataSourceSectionModule::class,
         UILaunchesUseCaseModule::class,
-        MapperModule::class
+        UIMapperModule::class,
+        DataMapperModule::class
     ]
 )
 interface AppComponent {
