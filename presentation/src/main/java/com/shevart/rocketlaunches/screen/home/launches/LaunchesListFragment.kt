@@ -123,7 +123,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
             id = 1,
             name = "Falcon - 1",
             countryFlagResId = R.drawable.flag_usa,
-            countryName = "USA",
+            countryNameResId = R.string.country_name_usa,
             favoritesIconResId = R.drawable.ic_favorite_white,
             date = "12.22.1999",
             status = UILaunchStatus(
@@ -136,7 +136,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
             id = 1,
             name = "Falcon - 1 by Elon Musk by Tesla and SpaceX",
             countryFlagResId = R.drawable.flag_usa,
-            countryName = "USA",
+            countryNameResId = R.string.country_name_usa,
             favoritesIconResId = R.drawable.ic_favorite_red,
             date = "12.22.1999",
             status = UILaunchStatus(
@@ -149,7 +149,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
             id = 1,
             name = "Falcon - 1",
             countryFlagResId = R.drawable.flag_usa,
-            countryName = "USA",
+            countryNameResId = R.string.country_name_usa,
             favoritesIconResId = R.drawable.ic_favorite_white,
             date = "12.22.1999",
             status = UILaunchStatus(
@@ -161,7 +161,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
             id = 1,
             name = "Falcon - 1",
             countryFlagResId = R.drawable.flag_usa,
-            countryName = "USA",
+            countryNameResId = R.string.country_name_usa,
             favoritesIconResId = R.drawable.ic_favorite_white,
             date = "12.22.1999",
             status = UILaunchStatus(

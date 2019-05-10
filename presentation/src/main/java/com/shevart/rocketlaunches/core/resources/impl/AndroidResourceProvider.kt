@@ -14,4 +14,13 @@ class AndroidResourceProvider
     override val statusScheduledBg = R.drawable.gradient_status_grey_light
     override val statusHoldBg = R.drawable.gradient_status_grey_light
     override val statusUnknownBg = R.drawable.gradient_status_grey
+
+    override val flagUsa = R.drawable.flag_usa
+    override val flagRussia = R.drawable.flag_russia
+    override val flagIndian = R.drawable.flag_indian
+    override val flagChine = R.drawable.flag_china
+    override val flagUnknown = R.drawable.flag_unknown
+
+    override val favoriteActive = R.drawable.ic_favorite_red
+    override val favoriteNonActive = R.drawable.ic_favorite_white
 }

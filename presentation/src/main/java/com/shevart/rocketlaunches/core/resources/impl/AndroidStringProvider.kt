@@ -14,4 +14,10 @@ class AndroidStringProvider
     override val statusScheduled = R.string.launch_status_scheduled
     override val statusHold = R.string.launch_status_hold
     override val statusUnknown = R.string.launch_status_unknown
+
+    override val countryUSA = R.string.country_name_usa
+    override val countryChina = R.string.country_name_china
+    override val countryIndian = R.string.country_name_indian
+    override val countryRussia = R.string.country_name_russia
+    override val countryUnknown = R.string.country_name_unknown
 }

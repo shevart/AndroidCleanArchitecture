@@ -9,4 +9,10 @@ interface StringProvider {
     val statusScheduled: Int
     val statusHold: Int
     val statusUnknown: Int
+
+    val countryUSA: Int
+    val countryChina: Int
+    val countryIndian: Int
+    val countryRussia: Int
+    val countryUnknown: Int
 }

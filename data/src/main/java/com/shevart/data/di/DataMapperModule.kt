@@ -93,4 +93,10 @@ abstract class DataMapperModule {
     abstract fun bindLaunchMapper(
         impl: LaunchMapper
     ): Mapper<ApiLaunch, RocketLaunch>
+
+    @Binds
+    @Named(DataMapperName.DATA_MAPPER_COUNTRY)
+    abstract fun bindCountryMapper(
+        impl: CountryMapper
+    ): Mapper<String, Country>
 }
