@@ -35,7 +35,7 @@ class LaunchesRepository
     private fun getFromCache(param: PageRequest) =
         Single.just(
             PageResult(
-                items = launches.subList(param.offset, param.count + 1),
+                items = launches.subList(param.offset, param.count),
                 count = param.count + 1,
                 offset = param.offset,
                 totalCount = totalLaunchesCount
@@ -63,6 +63,6 @@ class LaunchesRepository
 
     private companion object {
         private fun PageRequest.biggerThanCacheItemsCount(itemsCount: Int) =
-            (this.offset + this.count + 1) > itemsCount
+            (this.offset + this.count) > itemsCount
     }
 }

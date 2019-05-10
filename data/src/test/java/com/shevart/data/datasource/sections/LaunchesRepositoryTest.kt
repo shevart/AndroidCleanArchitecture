@@ -58,7 +58,7 @@ class LaunchesRepositoryTest {
         // check
         observer.assertValue { it.offset == pageResultWithLaunchesList.offset }
         observer.assertValue { it.totalCount == pageResultWithLaunchesList.totalCount }
-        observer.assertValue { it.items == pageResultWithLaunchesList.items }
+        observer.assertValue { it.items == pageResultWithLaunchesList.items.subList(0, count) }
         verify(remoteDataProvider, times(1)).getRocketLaunches(count, offset)
     }
 
