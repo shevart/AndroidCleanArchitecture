@@ -8,6 +8,7 @@ data class RocketLaunch(
     val date: Date,
     val rocket: Rocket,
     val status: LaunchStatus,
+    val country: Country,
     val missions: List<Mission>,
     val favorite: Boolean
 )

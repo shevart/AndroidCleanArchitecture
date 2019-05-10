@@ -16,5 +16,5 @@ data class ApiMission(
     @SerializedName(TYPE_NAME)
     val typeName: String,
     @SerializedName(AGENCIES)
-    val agencies: List<ApiAgency>
+    val agencies: List<ApiAgency>?
 )

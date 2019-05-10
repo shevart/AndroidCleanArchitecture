@@ -3,11 +3,20 @@
     <string name="launches">Launches</string>
     <string name="favorites">Favorites</string>
 
+    <string name="launch_status_launching_now">Launching now</string>
     <string name="launch_status_successfully">Successfully</string>
     <string name="launch_status_failed">Failed</string>
+    <string name="launch_status_in_flight">In flight</string>
     <string name="launch_status_canceled">Canceled</string>
     <string name="launch_status_scheduled">Scheduled</string>
+    <string name="launch_status_hold">Hold</string>
     <string name="launch_status_unknown">Unknown</string>
+
+    <string name="country_name_usa">USA</string>
+    <string name="country_name_russia">Russia</string>
+    <string name="country_name_china">China</string>
+    <string name="country_name_indian">Indian</string>
+    <string name="country_name_unknown">Unknown</string>
 
     <string name="error_no_internet">No internet connection!</string>
     <string name="error_unknown">Unknown</string>

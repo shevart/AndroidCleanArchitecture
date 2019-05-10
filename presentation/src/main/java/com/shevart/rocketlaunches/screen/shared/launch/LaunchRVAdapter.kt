@@ -20,7 +20,7 @@ class LaunchRVAdapter : BaseRVAdapter<UILaunch, LaunchViewHolder>() {
     override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
         val item = getItem(position)
         holder.ivRocketLaunchItemFlag.setImageResource(item.countryFlagResId)
-        holder.tvRocketLaunchItemCountry.text = item.countryName
+        holder.tvRocketLaunchItemCountry.setText(item.countryNameResId)
         holder.ivRocketLaunchItemFavorite.setImageResource(item.favoritesIconResId)
         holder.tvRocketLaunchItemTitle.text = item.name
         holder.tvRocketLaunchItemDate.text = item.date

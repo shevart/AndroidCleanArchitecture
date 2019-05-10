@@ -2,6 +2,7 @@ package com.shevart.domain.util
 
 import com.shevart.domain.contract.scheduler.SchedulerProvider
 import com.shevart.domain.models.launch.*
+import com.shevart.domain.models.launch.Country.Unknown
 import com.shevart.domain.models.launch.LaunchStatus.Successfully
 import io.reactivex.schedulers.Schedulers
 import java.util.*
@@ -29,7 +30,8 @@ fun createRocketLaunch(id: Long) =
         rocket = createRocket(id),
         status = Successfully,
         missions = createMissionsList(),
-        favorite = false
+        favorite = false,
+        country = Unknown("country")
     )
 
 fun createRocket(id: Long) =

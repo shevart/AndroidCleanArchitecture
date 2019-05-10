@@ -18,6 +18,10 @@
     <color name="statusRedEnd">#FF4B2B</color>
     <color name="statusBlueStart">#56CCF2</color>
     <color name="statusBlueEnd">#2F80ED</color>
-    <color name="statusGreyStart">#232526</color>
-    <color name="statusGreyEnd">#414345</color>
+    <color name="statusOrangeStart">#f12711</color>
+    <color name="statusOrangeEnd">#f5af19</color>
+    <color name="statusGreyStart">#7C7C7E</color>
+    <color name="statusGreyEnd">#5C5C61</color>
+    <color name="statusGreyLightStart">#757F9A</color>
+    <color name="statusGreyLightEnd">#D7DDE8</color>
 </resources>

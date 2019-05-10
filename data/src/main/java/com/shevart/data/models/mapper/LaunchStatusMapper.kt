@@ -10,10 +10,12 @@ import com.shevart.data.models.ApiLaunchStatus.Companion.LAUNCH_TBD_ID
 import com.shevart.domain.contract.mapper.Mapper
 import com.shevart.domain.models.launch.LaunchStatus
 import com.shevart.domain.models.launch.LaunchStatus.*
+import javax.inject.Inject
 
-class LaunchStatusMapper : Mapper<Int, LaunchStatus>() {
+class LaunchStatusMapper
+@Inject constructor() : Mapper<Int, LaunchStatus>() {
     override fun map(from: Int): LaunchStatus =
-        when(from) {
+        when (from) {
             LAUNCH_GO_ID -> LaunchingNow
             LAUNCH_TBD_ID -> Scheduled
             LAUNCH_SUCCESS_ID -> Successfully
