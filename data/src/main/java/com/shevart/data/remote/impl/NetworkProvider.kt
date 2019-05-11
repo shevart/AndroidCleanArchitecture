@@ -2,11 +2,8 @@ package com.shevart.data.remote.impl
 
 import com.shevart.data.di.name.DataMapperName
 import com.shevart.data.models.ApiLaunch
-import com.shevart.data.models.mapper.LaunchMapper
-import com.shevart.data.models.mapper.RocketMapper
 import com.shevart.data.remote.RemoteDataProvider
 import com.shevart.data.remote.impl.rest.api.LaunchApi
-import com.shevart.data.remote.impl.rest.response.GetLaunchesResponse
 import com.shevart.data.util.convertLaunchesResult
 import com.shevart.domain.contract.data.PageResult
 import com.shevart.domain.contract.mapper.Mapper
@@ -25,4 +22,10 @@ class NetworkProvider
         launchApi
             .getLaunches(count, offset)
             .map { it.convertLaunchesResult(launchMapper) }
+
+    override fun getRocketLaunchById(launchId: Long): Single<RocketLaunch> =
+        launchApi
+            .getLaunchById(launchId)
+            .map { it.launches.first() }
+            .map(launchMapper::map)
 }

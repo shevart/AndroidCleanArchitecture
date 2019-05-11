@@ -7,7 +7,9 @@ import com.shevart.domain.contract.data.FetchPolicy
 import com.shevart.domain.contract.data.FetchPolicy.REMOTE_ONLY
 import com.shevart.domain.contract.data.PageRequest
 import com.shevart.domain.contract.data.PageResult
+import com.shevart.domain.models.common.DataWrapper
 import com.shevart.domain.models.launch.RocketLaunch
+import com.shevart.domain.util.mapByDataWrapper
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -26,13 +28,27 @@ class LaunchesRepository
         val loadRemote =
             (fetchPolicy == REMOTE_ONLY) || param.biggerThanCacheItemsCount(launches.size)
         return if (loadRemote) {
-            loadLaunchesRemote(param)
+            loadLaunchesListRemote(param)
         } else {
-            getFromCache(param)
+            getLaunchesListFromCache(param)
         }
     }
 
-    private fun getFromCache(param: PageRequest) =
+    override fun getLaunchById(
+        launchId: Long,
+        fetchPolicy: FetchPolicy
+    ): Single<DataWrapper<RocketLaunch>> {
+        val loadRemote =
+            fetchPolicy == REMOTE_ONLY || !launches.hasLaunch(launchId)
+        return if (loadRemote) {
+            loadRocketLaunchRemote(launchId)
+                .mapByDataWrapper()
+        } else {
+            getRocketLaunchFromLocal(launchId)
+        }
+    }
+
+    private fun getLaunchesListFromCache(param: PageRequest) =
         Single.just(
             PageResult(
                 items = launches.subList(param.offset, (param.offset + param.count)),
@@ -42,17 +58,16 @@ class LaunchesRepository
             )
         )
 
-
-    private fun loadLaunchesRemote(param: PageRequest) =
+    private fun loadLaunchesListRemote(param: PageRequest) =
         remote.getRocketLaunches(param.count, param.offset)
-            .doOnSuccess { saveLaunches(param, it) }
+            .doOnSuccess { saveLaunchesList(param, it) }
 
     /**
      * There is very simple storage paged data to cache. It will be work
      * fine only if client will be request data consistently, page by page.
      * For other cases - data won't be saved to cache/local storage
      */
-    private fun saveLaunches(param: PageRequest, result: PageResult<RocketLaunch>) {
+    private fun saveLaunchesList(param: PageRequest, result: PageResult<RocketLaunch>) {
         val firstPage = launches.isEmpty() && param.offset == 0
         val nextPage = launches.size == result.offset
         if (firstPage || nextPage) {
@@ -61,8 +76,20 @@ class LaunchesRepository
         totalLaunchesCount = result.totalCount
     }
 
+    private fun loadRocketLaunchRemote(launchId: Long): Single<RocketLaunch> =
+        remote.getRocketLaunchById(launchId)
+
+    private fun getRocketLaunchFromLocal(launchId: Long): Single<DataWrapper<RocketLaunch>> =
+        Single.fromCallable {
+            val launch = launches.find { it.id == launchId }
+            return@fromCallable DataWrapper(launch)
+        }
+
     private companion object {
         private fun PageRequest.biggerThanCacheItemsCount(itemsCount: Int) =
             (this.offset + this.count) > itemsCount
+
+        private fun List<RocketLaunch>.hasLaunch(launchId: Long) =
+            this.find { it.id == launchId } != null
     }
 }

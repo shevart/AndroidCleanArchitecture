@@ -1,5 +1,7 @@
 package com.shevart.rocketlaunches.usecase
 
+import com.shevart.domain.models.common.DataWrapper
+import com.shevart.domain.models.launch.RocketLaunch
 import com.shevart.rocketlaunches.models.UILaunch
 import io.reactivex.Single
 
@@ -14,5 +16,9 @@ interface UILaunchesUseCase {
             val launches: List<UILaunch>,
             val hasMoreItems: Boolean
         )
+    }
+
+    interface GetUILaunchById {
+        fun execute(launchId: Long): Single<DataWrapper<UILaunch>>
     }
 }

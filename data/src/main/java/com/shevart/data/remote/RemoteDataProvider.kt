@@ -6,4 +6,6 @@ import io.reactivex.Single
 
 interface RemoteDataProvider {
     fun getRocketLaunches(count: Int, offset: Int = 0): Single<PageResult<RocketLaunch>>
+
+    fun getRocketLaunchById(launchId: Long): Single<RocketLaunch>
 }
