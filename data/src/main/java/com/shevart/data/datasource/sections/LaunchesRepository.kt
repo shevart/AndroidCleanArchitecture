@@ -35,7 +35,7 @@ class LaunchesRepository
     private fun getFromCache(param: PageRequest) =
         Single.just(
             PageResult(
-                items = launches.subList(param.offset, param.count),
+                items = launches.subList(param.offset, (param.offset + param.count)),
                 count = param.count + 1,
                 offset = param.offset,
                 totalCount = totalLaunchesCount

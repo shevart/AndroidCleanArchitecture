@@ -61,9 +61,9 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         ivLaunchesLoading.gone()
         evLaunchesError.gone()
         rvLaunches.visible()
+        tvLaunchesTitle.textColorByColorId(R.color.greyDark)
         adapter.setShowLoadingBottomItem(state.showBottomListLoadingIndicator, refreshData = false)
         adapter.updateItems(state.launchesItems)
-        tvLaunchesTitle.textColorByColorId(R.color.greyDark)
     }
 
     private fun showError(state: Error) {
