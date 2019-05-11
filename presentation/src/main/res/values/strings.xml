@@ -2,6 +2,9 @@
     <string name="app_name">RocketLaunches</string>
     <string name="launches">Launches</string>
     <string name="favorites">Favorites</string>
+    <string name="wiki">Wiki</string>
+
+    <string name="favorite">Favorite</string>
 
     <string name="launch_status_launching_now">Launching now</string>
     <string name="launch_status_successfully">Successfully</string>

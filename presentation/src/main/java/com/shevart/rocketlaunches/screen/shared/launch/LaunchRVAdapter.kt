@@ -34,7 +34,12 @@ class LaunchRVAdapter : BaseRVAdapter<UILaunch, RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
             RECORD_VIEW_TYPE -> {
-                LaunchViewHolder(inflate(parent, R.layout.item_rocket_launch))
+                LaunchViewHolder(inflate(parent, R.layout.item_rocket_launch)).apply {
+                    clLaunchItemContent.setOnClickListener {
+                        val position = adapterPosition
+                        getItemClickListener()?.onItemClick(getItem(position), position)
+                    }
+                }
             }
             LOADING_ITEM_VIEW_TYPE -> {
                 BottomLoadingViewHolder(inflate(parent, R.layout.item_progress_bottom))
@@ -75,6 +80,7 @@ class LaunchRVAdapter : BaseRVAdapter<UILaunch, RecyclerView.ViewHolder>() {
 
     @Suppress("JoinDeclarationAndAssignment")
     class LaunchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val clLaunchItemContent: View
         val ivRocketLaunchItemFlag: ImageView
         val ivRocketLaunchItemFavorite: ImageView
         val ivRocketLaunchItemCover: ImageView
@@ -84,6 +90,7 @@ class LaunchRVAdapter : BaseRVAdapter<UILaunch, RecyclerView.ViewHolder>() {
         val svRocketLaunchItemStatus: LaunchStatusView
 
         init {
+            clLaunchItemContent = itemView.findViewById(R.id.clLaunchItemContent)
             ivRocketLaunchItemFlag = itemView.findViewById(R.id.ivRocketLaunchItemFlag)
             ivRocketLaunchItemFavorite = itemView.findViewById(R.id.ivRocketLaunchItemFavorite)
             ivRocketLaunchItemCover = itemView.findViewById(R.id.ivRocketLaunchItemCover)

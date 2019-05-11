@@ -5,6 +5,7 @@ package com.shevart.rocketlaunches.di.module
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.shevart.rocketlaunches.base.mvvm.ViewModelFactory
+import com.shevart.rocketlaunches.screen.detail.WikiPageViewModel
 import com.shevart.rocketlaunches.screen.home.host.MainScreenViewModel
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel
 import dagger.Binds
@@ -25,6 +26,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LaunchesListViewModel::class)
     internal abstract fun bindLaunchesListViewModel(viewModel: LaunchesListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WikiPageViewModel::class)
+    internal abstract fun bindFavoriteWikiPageViewModel(viewModel: WikiPageViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

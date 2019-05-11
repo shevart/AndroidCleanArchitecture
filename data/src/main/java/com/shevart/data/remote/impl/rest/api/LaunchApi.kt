@@ -13,4 +13,9 @@ interface LaunchApi {
         @Path(COUNT_PARAM_NAME) count: Int,
         @Query(OFFSET) offset: Int
     ): Single<GetLaunchesResponse>
+
+    @GET(API_1_4 + LAUNCH + LAUNCH_ID_PARAM)
+    fun getLaunchById(
+        @Path(LAUNCH_ID_PARAM) launchId: Long
+    ): Single<GetLaunchesResponse>
 }

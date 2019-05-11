@@ -3,6 +3,7 @@ package com.shevart.rocketlaunches.base.screen
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.shevart.rocketlaunches.core.app.RocketLaunchesApp
@@ -62,6 +63,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected fun Disposable.addTo(d: CompositeDisposable) = this.apply {
         d.add(this)
+    }
+
+    protected fun showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun getAppComponent(): AppComponent {

@@ -4,5 +4,5 @@ import android.view.View
 
 @FunctionalInterface
 interface ItemClickListener<M> {
-    fun onItemClick(item: M, position: Int, view: View)
+    fun onItemClick(item: M, position: Int, view: View? = null)
 }

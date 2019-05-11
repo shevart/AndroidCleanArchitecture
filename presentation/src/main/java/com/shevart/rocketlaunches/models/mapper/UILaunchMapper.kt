@@ -31,9 +31,11 @@ class UILaunchMapper
             countryFlagResId = resourceProvider.getCountryFlagResId(from.country),
             countryNameResId = stringProvider.getCountryNameResId(from.country),
             favoritesIconResId = resourceProvider.getFavoriteResId(from.favorite),
+            favorite = from.favorite,
             date = from.date.toShortStr(),
             status = launchStatusMapper.map(from.status),
-            imageUrl = from.rocket.mediaInfo.obtainImageUrl()
+            imageUrl = from.rocket.mediaInfo.obtainImageUrl(),
+            wikiUrl = from.obtainWikiPageUrl()
         )
 
     /**
@@ -48,5 +50,17 @@ class UILaunchMapper
             candidate.resolution == DEFAULT_LIST_IMAGE_RESOLUTION
                     && !candidate.imageUrl.contains("placeholder")
         }?.imageUrl
+    }
+
+    private fun RocketLaunch.obtainWikiPageUrl(): String? {
+        val missionWikiUrl = this.missions.firstOrNull()?.mediaInfo?.wikiLink
+        if (!missionWikiUrl.isNullOrBlank()) {
+            return missionWikiUrl
+        }
+        val rocketWikiUrl = this.rocket.mediaInfo.wikiLink
+        if (!rocketWikiUrl.isNullOrBlank()) {
+            return rocketWikiUrl
+        }
+        return null
     }
 }

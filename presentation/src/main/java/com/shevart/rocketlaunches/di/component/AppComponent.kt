@@ -8,6 +8,7 @@ import com.shevart.rocketlaunches.di.module.ViewModelModule
 import com.shevart.rocketlaunches.di.module.data.UIMapperModule
 import com.shevart.rocketlaunches.di.module.usecase.LaunchesUseCaseModule
 import com.shevart.rocketlaunches.di.module.usecase.UILaunchesUseCaseModule
+import com.shevart.rocketlaunches.screen.detail.WikiPageActivity
 import com.shevart.rocketlaunches.screen.home.favorites.FavoritesFragment
 import com.shevart.rocketlaunches.screen.home.host.MainActivity
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListFragment
@@ -35,6 +36,8 @@ interface AppComponent {
     fun inject(app: RocketLaunchesApp)
 
     fun inject(activity: MainActivity)
+
+    fun inject(activity: WikiPageActivity)
 
     fun inject(fragment: LaunchesListFragment)
 

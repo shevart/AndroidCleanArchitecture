@@ -24,4 +24,8 @@ abstract class AbsStateViewModel<State, Event> : BaseViewModel() {
     fun updateStatePost(state: State) {
         stateLiveData.postValue(state)
     }
+
+    fun sendEvent(event: Event) {
+        eventsSubject.onNext(event)
+    }
 }

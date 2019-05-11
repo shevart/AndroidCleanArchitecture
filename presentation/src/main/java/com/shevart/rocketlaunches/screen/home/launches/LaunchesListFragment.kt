@@ -4,8 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shevart.rocketlaunches.R
+import com.shevart.rocketlaunches.base.adapter.ItemClickListener
 import com.shevart.rocketlaunches.base.mvvm.AbsMvvmFragment
+import com.shevart.rocketlaunches.core.navigation.Launcher
 import com.shevart.rocketlaunches.di.component.AppComponent
+import com.shevart.rocketlaunches.models.UILaunch
+import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event
+import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event.OpenLaunchDetail
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.*
 import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter
@@ -36,11 +41,22 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = LaunchRVAdapter()
+        adapter.setItemClickListener(object : ItemClickListener<UILaunch> {
+            override fun onItemClick(item: UILaunch, position: Int, view: View?) {
+                viewModel.openLaunchDetail(item)
+            }
+        })
         rvLaunches.layoutManager = LinearLayoutManager(requireContext())
         rvLaunches.adapter = adapter
         rvLaunches.addOnScrollListener(pagingListEndReachedListener)
 
         observeLiveDataForceNonNull(viewModel.getStateLiveData(), this::renderState)
+        viewModel.getEventsObservable()
+            .subscribe(
+                this::handleEvent,
+                this::defaultHandleException
+            )
+            .disposeOnDestroyView()
     }
 
     private fun renderState(state: State) {
@@ -51,24 +67,31 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         }
     }
 
+    private fun handleEvent(event: Event) {
+        when (event) {
+            is OpenLaunchDetail -> Launcher.openWiki(requireActivity(), event.launchId)
+        }
+    }
+
     private fun showLoading() {
-        ivLaunchesLoading.visible()
         rvLaunches.gone()
         evLaunchesError.gone()
+        ivLaunchesLoading.visible()
     }
 
     private fun showLaunches(state: ShowLaunchesList) {
-        ivLaunchesLoading.gone()
-        evLaunchesError.gone()
         rvLaunches.visible()
+        evLaunchesError.gone()
+        ivLaunchesLoading.gone()
+        tvLaunchesTitle.textColorByColorId(R.color.greyDark)
+        // the order is important
         adapter.setShowLoadingBottomItem(state.showBottomListLoadingIndicator, refreshData = false)
         adapter.updateItems(state.launchesItems)
-        tvLaunchesTitle.textColorByColorId(R.color.greyDark)
     }
 
     private fun showError(state: Error) {
-        ivLaunchesLoading.gone()
         rvLaunches.gone()
+        ivLaunchesLoading.gone()
         evLaunchesError.visible()
         tvLaunchesTitle.textColorByColorId(R.color.white)
         errorViewHelper.showError(evLaunchesError, state.error)
