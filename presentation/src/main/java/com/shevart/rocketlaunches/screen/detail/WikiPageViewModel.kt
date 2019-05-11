@@ -45,7 +45,7 @@ class WikiPageViewModel
         if (!launch.wikiUrl.isNullOrBlank()) {
             updateState(launch.createState())
         } else {
-            sendEvent(createErrorEventForEmptyWikiUrl())
+            updateState(createEmptyWikiPageState())
         }
     }
 
@@ -56,7 +56,8 @@ class WikiPageViewModel
 
     data class State(
         val favorite: Boolean = false,
-        val wikiPageLink: String = ""
+        val wikiPageLink: String = "",
+        val emptyView: Boolean = false
     )
 
     sealed class Event {
@@ -69,8 +70,8 @@ class WikiPageViewModel
             wikiPageLink = this.wikiUrl!!
         )
 
-        private fun createErrorEventForEmptyWikiUrl() = ShowErrorAlert(
-            reason = IllegalStateException("The wiki page url is null!")
+        private fun createEmptyWikiPageState() = State(
+            emptyView = true
         )
 
         private fun Throwable.createErrorEvent() = ShowErrorAlert(
