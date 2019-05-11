@@ -1,12 +1,10 @@
 package com.shevart.rocketlaunches.screen.home.launches
 
-import com.shevart.domain.models.error.LoadDataError
 import com.shevart.rocketlaunches.base.mvvm.AbsStateViewModel
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State
-import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.Loading
-import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.ShowLaunchesList
+import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.*
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase.GetNextUILaunchesPage.UIResult
 import com.shevart.rocketlaunches.util.plus
@@ -69,8 +67,8 @@ class LaunchesListViewModel
     }
 
     private fun onPageLoadingFailed(e: Throwable) {
-        // todo show error
         nextPageLoadingNow = false
+        updateState(Error(e))
         defaultHandleException(e)
     }
 
@@ -84,10 +82,7 @@ class LaunchesListViewModel
             val launchesItems: List<UILaunch> = emptyList()
         ) : State()
 
-        data class Error(
-            val error: Throwable,
-            val loadDataError: LoadDataError? = null
-        ) : State()
+        data class Error(val error: Throwable) : State()
     }
 
     private companion object {
