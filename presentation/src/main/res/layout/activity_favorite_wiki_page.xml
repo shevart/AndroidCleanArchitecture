@@ -10,4 +10,9 @@
         android:id="@+id/wbWiki"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <include
+        android:id="@+id/vwEmptyWikiPage"
+        layout="@layout/layout_empty_wiki_page"
+        android:visibility="gone" />
 </LinearLayout>

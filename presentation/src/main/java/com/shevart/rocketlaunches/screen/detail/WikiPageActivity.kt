@@ -14,6 +14,8 @@ import com.shevart.rocketlaunches.util.getLaunchId
 import com.shevart.rocketlaunches.util.getWikiPageUrl
 import com.shevart.rocketlaunches.util.observeLiveDataForceNonNull
 import com.shevart.rocketlaunches.util.setForWiki
+import com.shevart.rocketlaunches.util.ui.gone
+import com.shevart.rocketlaunches.util.ui.visible
 import kotlinx.android.synthetic.main.activity_favorite_wiki_page.*
 
 class WikiPageActivity : AbsMvvmActivity<WikiPageViewModel>() {
@@ -63,7 +65,14 @@ class WikiPageActivity : AbsMvvmActivity<WikiPageViewModel>() {
             R.drawable.ic_favorite_white
         }
         favoriteMenuItem?.setIcon(favoriteIconResId)
-        wbWiki.loadUrl(state.wikiPageLink)
+        if (state.emptyView) {
+            vwEmptyWikiPage.visible()
+            wbWiki.gone()
+        } else {
+            vwEmptyWikiPage.gone()
+            wbWiki.visible()
+            wbWiki.loadUrl(state.wikiPageLink)
+        }
     }
 
     private fun handleEvent(event: Event) {

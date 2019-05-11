@@ -3,6 +3,8 @@ package com.shevart.rocketlaunches.screen.util
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.models.UILaunchStatus
 
+const val LAUNCH_ID = 100L
+
 val launch = UILaunch(
     id = 123,
     name = "",
@@ -14,5 +16,6 @@ val launch = UILaunch(
     status = UILaunchStatus(
         statusResId = 0,
         backgroundResId = 0
-    )
+    ),
+    wikiUrl = "wikiUrl"
 )
