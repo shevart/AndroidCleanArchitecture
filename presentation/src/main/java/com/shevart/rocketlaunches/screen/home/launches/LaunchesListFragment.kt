@@ -73,8 +73,8 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         evLaunchesError.visible()
         // todo
         tvLaunchesTitle.textColorByColorId(R.color.white)
-        evLaunchesError.setBackgroundColorResId(R.color.errorNoInternet)
-        evLaunchesError.setImage(R.drawable.error_no_internet)
+        evLaunchesError.setBackgroundColorResId(R.color.error_data_loading)
+        evLaunchesError.setImage(R.drawable.error_dataa_loading)
         evLaunchesError.setTitle(R.string.error_no_internet)
         evLaunchesError.setDescription(R.string.error_no_internet)
     }

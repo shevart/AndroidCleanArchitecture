@@ -10,7 +10,7 @@
     <color name="red">#ff4040</color>
     <color name="blackAlpha20">#33000000</color>
 
-    <color name="errorNoInternet">#212237</color>
+    <color name="error_data_loading">#212237</color>
 
     <color name="statusGreenStart">#7ab402</color>
     <color name="statusGreenEnd">#4eba1a</color>
