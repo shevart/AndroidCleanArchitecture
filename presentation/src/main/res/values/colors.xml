@@ -11,6 +11,7 @@
     <color name="blackAlpha20">#33000000</color>
 
     <color name="error_data_loading">#212237</color>
+    <color name="error_unknown">#2e4f64</color>
 
     <color name="statusGreenStart">#7ab402</color>
     <color name="statusGreenEnd">#4eba1a</color>
