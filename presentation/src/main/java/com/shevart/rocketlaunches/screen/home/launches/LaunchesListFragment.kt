@@ -3,6 +3,7 @@ package com.shevart.rocketlaunches.screen.home.launches
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionManager
 import com.shevart.rocketlaunches.R
 import com.shevart.rocketlaunches.base.adapter.ItemClickListener
 import com.shevart.rocketlaunches.base.mvvm.AbsMvvmFragment
@@ -60,6 +61,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
     }
 
     private fun renderState(state: State) {
+        TransitionManager.beginDelayedTransition(flLaunchesRoot)
         when (state) {
             is Loading -> showLoading()
             is ShowLaunchesList -> showLaunches(state)
