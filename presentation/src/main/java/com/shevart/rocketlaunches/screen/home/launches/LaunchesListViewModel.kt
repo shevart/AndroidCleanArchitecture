@@ -3,6 +3,7 @@ package com.shevart.rocketlaunches.screen.home.launches
 import com.shevart.rocketlaunches.base.mvvm.AbsStateViewModel
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event
+import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event.OpenLaunchDetail
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.*
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
@@ -25,11 +26,15 @@ class LaunchesListViewModel
         val state = currentState as? ShowLaunchesList
         // Why I use named variable for if statement? - for simplify readability.
         // I don't like use methods for such actions because there is one goal for this
-        // statement - well readable name of condition. And variable covers it
+        // statement - well readable name of condition. And variable covers it well
         val loadNextPage = state?.showBottomListLoadingIndicator == true && !nextPageLoadingNow
         if (loadNextPage) {
             loadNextPage(state!!.launchesItems.size)
         }
+    }
+
+    fun openLaunchDetail(launch: UILaunch) {
+        sendEvent(OpenLaunchDetail(launchId = launch.id))
     }
 
     private fun loadFirstPage() {
@@ -72,7 +77,9 @@ class LaunchesListViewModel
         defaultHandleException(e)
     }
 
-    sealed class Event
+    sealed class Event {
+        data class OpenLaunchDetail(val launchId: Long) : Event()
+    }
 
     sealed class State {
         object Loading : State()

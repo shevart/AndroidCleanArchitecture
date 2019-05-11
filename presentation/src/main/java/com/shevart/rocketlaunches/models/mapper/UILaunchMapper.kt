@@ -31,6 +31,7 @@ class UILaunchMapper
             countryFlagResId = resourceProvider.getCountryFlagResId(from.country),
             countryNameResId = stringProvider.getCountryNameResId(from.country),
             favoritesIconResId = resourceProvider.getFavoriteResId(from.favorite),
+            favorite = from.favorite,
             date = from.date.toShortStr(),
             status = launchStatusMapper.map(from.status),
             imageUrl = from.rocket.mediaInfo.obtainImageUrl()

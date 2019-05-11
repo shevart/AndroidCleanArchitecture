@@ -14,3 +14,9 @@ fun String.checkIsValidWebUrl() {
         throw IllegalArgumentException("Invalid web url ($this)!")
     }
 }
+
+fun Long.checkLaunchId() {
+    if (this == 0L) {
+        throw IllegalArgumentException("There is a very bad launchId - $this!")
+    }
+}
