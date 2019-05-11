@@ -32,6 +32,10 @@ class ErrorView
         tvErrorViewDescription.setText(stringResId)
     }
 
+    fun setDescription(description: String) {
+        tvErrorViewDescription.text = description
+    }
+
     fun setImage(@DrawableRes imageResId: Int) {
         ivErrorViewImage.setImageResource(imageResId)
     }

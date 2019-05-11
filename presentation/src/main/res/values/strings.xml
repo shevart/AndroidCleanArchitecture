@@ -19,7 +19,8 @@
     <string name="country_name_unknown">Unknown</string>
 
     <string name="error_no_internet">No internet connection!</string>
-    <string name="error_unknown">Unknown</string>
+    <string name="error_no_internet_description">Try turn on WiFi or mobile network.\nAnd come back ;)</string>
+    <string name="error_unknown">Oops, something went wrong!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

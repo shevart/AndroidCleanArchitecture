@@ -5,12 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.shevart.rocketlaunches.base.screen.BaseFragment
+import com.shevart.rocketlaunches.core.errorview.ErrorViewHelper
 import com.shevart.rocketlaunches.util.subscribeOnIoObserveOnMain
 import javax.inject.Inject
 
 abstract class AbsMvvmFragment<VM : ViewModel> : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var errorViewHelper: ErrorViewHelper
     protected lateinit var viewModel: VM
 
     abstract fun provideViewModelClass(): Class<VM>

@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_launches_list.*
 
 class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
     private lateinit var adapter: LaunchRVAdapter
-
     private val pagingListEndReachedListener: ListScrollItemListener by lazy {
         object : ListScrollItemListener(rvLaunches.layoutManager!!) {
             override fun onEndListReached() {
@@ -71,11 +70,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         ivLaunchesLoading.gone()
         rvLaunches.gone()
         evLaunchesError.visible()
-        // todo
         tvLaunchesTitle.textColorByColorId(R.color.white)
-        evLaunchesError.setBackgroundColorResId(R.color.error_data_loading)
-        evLaunchesError.setImage(R.drawable.error_dataa_loading)
-        evLaunchesError.setTitle(R.string.error_no_internet)
-        evLaunchesError.setDescription(R.string.error_no_internet)
+        errorViewHelper.showError(evLaunchesError, state.error)
     }
 }

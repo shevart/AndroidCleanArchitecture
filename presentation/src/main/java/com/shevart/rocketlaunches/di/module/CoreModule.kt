@@ -5,6 +5,8 @@ package com.shevart.rocketlaunches.di.module
 import com.shevart.domain.contract.app.AppConfigProvider
 import com.shevart.domain.contract.scheduler.SchedulerProvider
 import com.shevart.rocketlaunches.core.app.AppConfigProviderImpl
+import com.shevart.rocketlaunches.core.errorview.ErrorViewHelper
+import com.shevart.rocketlaunches.core.errorview.impl.ErrorViewHelperImpl
 import com.shevart.rocketlaunches.core.resources.ResourceProvider
 import com.shevart.rocketlaunches.core.resources.StringProvider
 import com.shevart.rocketlaunches.core.resources.impl.AndroidResourceProvider
@@ -39,4 +41,9 @@ abstract class CoreModule {
     abstract fun bindStringProvider(
         impl: AndroidStringProvider
     ): StringProvider
+
+    @Binds
+    abstract fun bindErrorViewHelper(
+        impl: ErrorViewHelperImpl
+    ): ErrorViewHelper
 }
