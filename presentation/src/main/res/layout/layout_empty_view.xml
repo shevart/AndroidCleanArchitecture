@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivEmptyViewLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -20,34 +20,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@drawable/empty_wiki_page" />
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@drawable/empty_wiki_page" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvEmptyViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:maxWidth="280dp"
-        android:text="@string/empty_wiki_title"
+        android:maxWidth="@dimen/contentMediumWidth"
         android:textColor="@color/greyDark"
         android:textSize="@dimen/textBigTitleDimen"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="@+id/ivEmptyViewLogo"
+        app:layout_constraintStart_toStartOf="@+id/ivEmptyViewLogo"
+        app:layout_constraintTop_toBottomOf="@+id/ivEmptyViewLogo"
+        tools:text="@string/empty_wiki_title" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvEmptyViewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:maxWidth="280dp"
-        android:text="@string/empty_wiki_description"
+        android:maxWidth="@dimen/contentMediumWidth"
         android:textColor="@color/greyDark"
-        android:textSize="@dimen/textTitleDimen"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:textSize="@dimen/textBigDimen"
+        app:layout_constraintEnd_toEndOf="@+id/tvEmptyViewTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvEmptyViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmptyViewTitle"
+        tools:text="@string/empty_wiki_description" />
 </androidx.constraintlayout.widget.ConstraintLayout>

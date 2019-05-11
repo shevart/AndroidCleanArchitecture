@@ -17,6 +17,7 @@ import com.shevart.rocketlaunches.util.setForWiki
 import com.shevart.rocketlaunches.util.ui.gone
 import com.shevart.rocketlaunches.util.ui.visible
 import kotlinx.android.synthetic.main.activity_favorite_wiki_page.*
+import kotlinx.android.synthetic.main.layout_empty_view.*
 
 class WikiPageActivity : AbsMvvmActivity<WikiPageViewModel>() {
     // quick fix for favorite icon.
@@ -36,6 +37,9 @@ class WikiPageActivity : AbsMvvmActivity<WikiPageViewModel>() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.wiki)
         wbWiki.setForWiki()
+        ivEmptyViewLogo.setImageResource(R.drawable.empty_wiki_page)
+        tvEmptyViewTitle.setText(R.string.empty_wiki_title)
+        tvEmptyViewDescription.setText(R.string.empty_wiki_description)
 
         observeLiveDataForceNonNull(viewModel.getStateLiveData(), this::renderState)
         viewModel.getEventsObservable()
