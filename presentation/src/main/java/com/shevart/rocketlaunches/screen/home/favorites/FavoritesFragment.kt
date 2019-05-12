@@ -3,6 +3,7 @@ package com.shevart.rocketlaunches.screen.home.favorites
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionManager
 import com.shevart.rocketlaunches.R
 import com.shevart.rocketlaunches.base.mvvm.AbsMvvmFragment
 import com.shevart.rocketlaunches.core.navigation.Launcher
@@ -14,6 +15,7 @@ import com.shevart.rocketlaunches.screen.home.favorites.FavoritesViewModel.State
 import com.shevart.rocketlaunches.screen.home.favorites.FavoritesViewModel.State.*
 import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter
 import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter.LaunchItemClickListener
+import com.shevart.rocketlaunches.util.animateChanges
 import com.shevart.rocketlaunches.util.observeLiveDataForceNonNull
 import com.shevart.rocketlaunches.util.ui.gone
 import com.shevart.rocketlaunches.util.ui.visible
@@ -44,7 +46,7 @@ class FavoritesFragment : AbsMvvmFragment<FavoritesViewModel>() {
             }
 
             override fun onLaunchFavoriteButtonClick(launch: UILaunch) {
-                TODO()
+                viewModel.removeFromFavorites(launch)
             }
         }
         rvFavorites.adapter = adapter
@@ -60,6 +62,7 @@ class FavoritesFragment : AbsMvvmFragment<FavoritesViewModel>() {
     }
 
     private fun renderState(state: State) {
+        flFavoritesRoot.animateChanges()
         when (state) {
             is Loading -> showLoading()
             is EmptyFavoritesList -> showEmptyView()
@@ -94,5 +97,4 @@ class FavoritesFragment : AbsMvvmFragment<FavoritesViewModel>() {
 
         adapter.updateItems(state.favorites)
     }
-
 }

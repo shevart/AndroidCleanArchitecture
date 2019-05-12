@@ -16,6 +16,7 @@ import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Sta
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.*
 import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter
 import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter.LaunchItemClickListener
+import com.shevart.rocketlaunches.util.animateChanges
 import com.shevart.rocketlaunches.util.observeLiveDataForceNonNull
 import com.shevart.rocketlaunches.util.ui.ListScrollItemListener
 import com.shevart.rocketlaunches.util.ui.gone
@@ -66,7 +67,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
     }
 
     private fun renderState(state: State) {
-        TransitionManager.beginDelayedTransition(flLaunchesRoot)
+        flLaunchesRoot.animateChanges()
         when (state) {
             is Loading -> showLoading()
             is ShowLaunchesList -> showLaunches(state)
