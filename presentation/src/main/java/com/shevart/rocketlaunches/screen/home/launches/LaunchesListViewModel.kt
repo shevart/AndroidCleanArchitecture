@@ -1,5 +1,6 @@
 package com.shevart.rocketlaunches.screen.home.launches
 
+import com.shevart.domain.usecase.contract.LaunchesUseCase
 import com.shevart.rocketlaunches.base.mvvm.AbsStateViewModel
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event
@@ -9,11 +10,14 @@ import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Sta
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase.GetNextUILaunchesPage.UIResult
 import com.shevart.rocketlaunches.util.plus
+import io.reactivex.Completable
 import javax.inject.Inject
 
 class LaunchesListViewModel
 @Inject constructor(
-    private val getNextLaunchesPageUseCase: UILaunchesUseCase.GetNextUILaunchesPage
+    private val getNextLaunchesPageUseCase: UILaunchesUseCase.GetNextUILaunchesPage,
+    private val addLaunchToFavoritesUseCase: LaunchesUseCase.AddLaunchToFavorites,
+    private val removeLaunchFromFavoritesUseCase: LaunchesUseCase.RemoveLaunchFromFavorites
 ) : AbsStateViewModel<State, Event>() {
     private var nextPageLoadingNow = false
 
@@ -35,6 +39,14 @@ class LaunchesListViewModel
 
     fun openLaunchDetail(launch: UILaunch) {
         sendEvent(OpenLaunchDetail(launchId = launch.id))
+    }
+
+    fun favoriteButtonClick(launch: UILaunch) {
+        if (launch.favorite) {
+            removeLaunchFromFavorites(launch.id)
+        } else {
+            addLaunchToFavorites(launch.id)
+        }
     }
 
     private fun loadFirstPage() {
@@ -75,6 +87,74 @@ class LaunchesListViewModel
         nextPageLoadingNow = false
         updateState(Error(e))
         defaultHandleException(e)
+    }
+
+    private fun addLaunchToFavorites(launchId: Long) {
+        updateLaunchFavoriteField(
+            launchId = launchId,
+            updateLaunchRequest = addLaunchToFavoritesUseCase.execute(launchId),
+            successAction = this::markLaunchAsFavorite,
+            failureAction = this::markLaunchAsNotFavorite
+        )
+
+    }
+
+    private fun removeLaunchFromFavorites(launchId: Long) {
+        updateLaunchFavoriteField(
+            launchId = launchId,
+            updateLaunchRequest = removeLaunchFromFavoritesUseCase.execute(launchId),
+            successAction = this::markLaunchAsNotFavorite,
+            failureAction = this::markLaunchAsFavorite
+        )
+    }
+
+    private fun updateLaunchFavoriteField(
+        launchId: Long,
+        updateLaunchRequest: Completable,
+        successAction: (launchId: Long) -> Unit,
+        failureAction: (launchId: Long) -> Unit
+    ) {
+        // update launch on UI before request
+        successAction(launchId)
+        // proceed update launch request
+        updateLaunchRequest
+            .doOnError { failureAction(launchId) }
+            .subscribe(
+                {},// do nothing, launch already updated on UI
+                this::defaultHandleException
+            )
+            .addToClearedDisposable()
+    }
+
+    private fun markLaunchAsFavorite(launchId: Long) {
+        updateLaunchFavoriteFieldInState(
+            launchId = launchId,
+            favorite = true
+        )
+    }
+
+    private fun markLaunchAsNotFavorite(launchId: Long) {
+        updateLaunchFavoriteFieldInState(
+            launchId = launchId,
+            favorite = false
+        )
+    }
+
+    private fun updateLaunchFavoriteFieldInState(launchId: Long, favorite: Boolean) {
+        val state = currentState as? ShowLaunchesList
+            ?: return
+        // find launch
+        val launches = state.launchesItems.toMutableList()
+        val launch = launches.find { it.id == launchId }
+        if (launch == null || launch.favorite == favorite) {
+            return
+        }
+        // update launch favorite field
+        val launchPosition = launches.indexOf(launch)
+        launches.removeAt(launchPosition)
+        launches.add(launchPosition, launch.copy(favorite = favorite))
+        // update state
+        updateState(state.copy(launchesItems = launches))
     }
 
     sealed class Event {

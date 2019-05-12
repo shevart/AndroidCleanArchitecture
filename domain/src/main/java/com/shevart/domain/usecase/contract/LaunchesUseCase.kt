@@ -2,6 +2,7 @@ package com.shevart.domain.usecase.contract
 
 import com.shevart.domain.models.common.DataWrapper
 import com.shevart.domain.models.launch.RocketLaunch
+import io.reactivex.Completable
 import io.reactivex.Single
 
 interface LaunchesUseCase {
@@ -16,5 +17,17 @@ interface LaunchesUseCase {
 
     interface GetLaunchById {
         fun execute(launchId: Long): Single<DataWrapper<RocketLaunch>>
+    }
+
+    interface GetFavoriteLaunches {
+        fun execute(): Single<List<RocketLaunch>>
+    }
+
+    interface AddLaunchToFavorites {
+        fun execute(launchId: Long): Completable
+    }
+
+    interface RemoveLaunchFromFavorites {
+        fun execute(launchId: Long): Completable
     }
 }

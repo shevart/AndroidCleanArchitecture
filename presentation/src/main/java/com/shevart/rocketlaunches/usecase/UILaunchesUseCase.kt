@@ -21,4 +21,8 @@ interface UILaunchesUseCase {
     interface GetUILaunchById {
         fun execute(launchId: Long): Single<DataWrapper<UILaunch>>
     }
+
+    interface GetUIFavoriteLaunches {
+        fun execute(): Single<List<UILaunch>>
+    }
 }

@@ -3,8 +3,7 @@
 package com.shevart.rocketlaunches.di.module.usecase
 
 import com.shevart.domain.usecase.contract.LaunchesUseCase
-import com.shevart.domain.usecase.impl.GetLaunchByIdUseCase
-import com.shevart.domain.usecase.impl.GetNextLaunchesPageUseCase
+import com.shevart.domain.usecase.impl.*
 import dagger.Binds
 import dagger.Module
 
@@ -19,4 +18,19 @@ abstract class LaunchesUseCaseModule {
     abstract fun bindGetLaunchByIdUseCase(
         useCase: GetLaunchByIdUseCase
     ): LaunchesUseCase.GetLaunchById
+
+    @Binds
+    abstract fun bindGetFavoritesLaunchesUseCase(
+        useCase: GetFavoriteLaunchesUseCase
+    ): LaunchesUseCase.GetFavoriteLaunches
+
+    @Binds
+    abstract fun bindAddLaunchToFavoritesUseCase(
+        useCase: AddLaunchToFavoritesUseCase
+    ): LaunchesUseCase.AddLaunchToFavorites
+
+    @Binds
+    abstract fun bindRemoveLaunchFromFavoritesUseCase(
+        useCase: RemoveLaunchFromFavoritesUseCase
+    ): LaunchesUseCase.RemoveLaunchFromFavorites
 }

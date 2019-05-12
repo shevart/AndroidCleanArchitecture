@@ -42,11 +42,18 @@ class LaunchesRepository
             fetchPolicy == REMOTE_ONLY || !launches.hasLaunch(launchId)
         return if (loadRemote) {
             loadRocketLaunchRemote(launchId)
-                .mapByDataWrapper()
         } else {
             getRocketLaunchFromLocal(launchId)
         }
     }
+
+    override fun getFavoritesLaunches() = local.getFavorites()
+
+    override fun addLaunchToFavorites(launch: RocketLaunch) =
+        local.addToFavorites(launch)
+
+    override fun removeLaunchFromFavorites(launch: RocketLaunch) =
+        local.removeFromFavorites(launch)
 
     private fun getLaunchesListFromCache(param: PageRequest) =
         Single.just(
@@ -76,8 +83,10 @@ class LaunchesRepository
         totalLaunchesCount = result.totalCount
     }
 
-    private fun loadRocketLaunchRemote(launchId: Long): Single<RocketLaunch> =
-        remote.getRocketLaunchById(launchId)
+    private fun loadRocketLaunchRemote(launchId: Long): Single<DataWrapper<RocketLaunch>> =
+        remote
+            .getRocketLaunchById(launchId)
+            .mapByDataWrapper()
 
     private fun getRocketLaunchFromLocal(launchId: Long): Single<DataWrapper<RocketLaunch>> =
         Single.fromCallable {

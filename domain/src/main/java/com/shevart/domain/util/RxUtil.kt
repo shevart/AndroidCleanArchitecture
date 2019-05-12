@@ -20,3 +20,6 @@ fun Completable.subscribeOnIoObserveOnMain(schedulerProvider: SchedulerProvider)
 
 fun <T> Single<T>.mapByDataWrapper(): Single<DataWrapper<T>> =
     this.map { DataWrapper(it) }
+
+fun <T> Single<DataWrapper<T>>.mapForceObtainDataFromDataWrapper(): Single<T> =
+    this.map { it.data!! }

@@ -12,6 +12,7 @@ import com.shevart.rocketlaunches.screen.customview.launchstatus.LaunchStatusVie
 import com.shevart.rocketlaunches.util.ui.loadInto
 
 class LaunchRVAdapter : BaseRVAdapter<UILaunch, RecyclerView.ViewHolder>() {
+    var launchItemClickListener: LaunchItemClickListener? = null
     // I prefer use special UI models for loaders like this, but I have no time for do it.
     private var showLoadingBottomItem = false
 
@@ -36,8 +37,11 @@ class LaunchRVAdapter : BaseRVAdapter<UILaunch, RecyclerView.ViewHolder>() {
             RECORD_VIEW_TYPE -> {
                 LaunchViewHolder(inflate(parent, R.layout.item_rocket_launch)).apply {
                     clLaunchItemContent.setOnClickListener {
-                        val position = adapterPosition
-                        getItemClickListener()?.onItemClick(getItem(position), position)
+                        launchItemClickListener?.onLaunchClick(launch = getItem(adapterPosition))
+                    }
+                    ivRocketLaunchItemFavorite.setOnClickListener {
+                        launchItemClickListener
+                            ?.onLaunchFavoriteButtonClick(launch = getItem(adapterPosition))
                     }
                 }
             }
@@ -106,5 +110,11 @@ class LaunchRVAdapter : BaseRVAdapter<UILaunch, RecyclerView.ViewHolder>() {
     private companion object {
         private const val RECORD_VIEW_TYPE = 1
         private const val LOADING_ITEM_VIEW_TYPE = 2
+    }
+
+    interface LaunchItemClickListener {
+        fun onLaunchClick(launch: UILaunch)
+
+        fun onLaunchFavoriteButtonClick(launch: UILaunch)
     }
 }

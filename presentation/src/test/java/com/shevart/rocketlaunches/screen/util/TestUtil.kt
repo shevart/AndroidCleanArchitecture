@@ -19,3 +19,9 @@ val launch = UILaunch(
     ),
     wikiUrl = "wikiUrl"
 )
+
+val launchesList = listOf(
+    launch.copy(id = 1),
+    launch.copy(id = 2),
+    launch.copy(id = 3)
+)

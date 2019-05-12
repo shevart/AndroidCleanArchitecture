@@ -15,6 +15,7 @@ import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Eve
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.*
 import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter
+import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter.LaunchItemClickListener
 import com.shevart.rocketlaunches.util.observeLiveDataForceNonNull
 import com.shevart.rocketlaunches.util.ui.ListScrollItemListener
 import com.shevart.rocketlaunches.util.ui.gone
@@ -42,11 +43,15 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = LaunchRVAdapter()
-        adapter.setItemClickListener(object : ItemClickListener<UILaunch> {
-            override fun onItemClick(item: UILaunch, position: Int, view: View?) {
-                viewModel.openLaunchDetail(item)
+        adapter.launchItemClickListener = object : LaunchItemClickListener {
+            override fun onLaunchClick(launch: UILaunch) {
+                viewModel.openLaunchDetail(launch)
             }
-        })
+
+            override fun onLaunchFavoriteButtonClick(launch: UILaunch) {
+                viewModel.favoriteButtonClick(launch)
+            }
+        }
         rvLaunches.layoutManager = LinearLayoutManager(requireContext())
         rvLaunches.adapter = adapter
         rvLaunches.addOnScrollListener(pagingListEndReachedListener)
