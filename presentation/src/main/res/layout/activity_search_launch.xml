@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/blackAlpha20"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/baseDimen"
+    android:paddingTop="@dimen/doubleDimen"
+    android:paddingEnd="@dimen/baseDimen"
+    android:paddingBottom="@dimen/baseDimen"
     tools:context=".screen.search.SearchLaunchActivity">
 
+    <EditText
+        android:id="@+id/etSearchLaunch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/search_launch"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
+        tools:ignore="Autofill" />
+
+    <TextView
+        android:id="@+id/tvSearchLaunchCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="?selectableItemBackground"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:paddingStart="@dimen/baseDimen"
+        android:paddingEnd="@dimen/baseDimen"
+        android:text="@string/cancel"
+        android:textColor="@color/greyDark" />
 </LinearLayout>

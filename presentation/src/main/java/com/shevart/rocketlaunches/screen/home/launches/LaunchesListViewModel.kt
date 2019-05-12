@@ -7,6 +7,7 @@ import com.shevart.rocketlaunches.base.mvvm.AbsStateViewModel
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event.OpenLaunchDetail
+import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event.OpenSearchScreen
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.*
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
@@ -52,6 +53,10 @@ class LaunchesListViewModel
         } else {
             addLaunchToFavorites(launch.id)
         }
+    }
+
+    fun openSearchScreen() {
+        sendEvent(OpenSearchScreen)
     }
 
     private fun loadFirstPage() {
@@ -180,6 +185,7 @@ class LaunchesListViewModel
         updateUILaunchFavoriteFieldUseCase.execute(launch, favorite)
 
     sealed class Event {
+        object OpenSearchScreen : Event()
         data class OpenLaunchDetail(val launchId: Long) : Event()
     }
 

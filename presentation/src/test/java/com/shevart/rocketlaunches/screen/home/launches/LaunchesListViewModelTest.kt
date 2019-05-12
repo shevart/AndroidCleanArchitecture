@@ -6,6 +6,7 @@ import com.shevart.domain.usecase.contract.LaunchesUseCase
 import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.FavoriteEvent
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event.OpenLaunchDetail
+import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event.OpenSearchScreen
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.Loading
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.ShowLaunchesList
 import com.shevart.rocketlaunches.screen.util.launch
@@ -116,6 +117,20 @@ class LaunchesListViewModelTest {
         // check
         val event = eventsObserver.values().first() as OpenLaunchDetail
         assertEquals(launch.id, event.launchId)
+        eventsObserver.assertNoErrors()
+    }
+
+    @Test
+    fun `test open search screen`() {
+        // prepare
+        val viewModel = createViewModel()
+        val eventsObserver = viewModel.getEventsObservable().test()
+
+        // perform
+        viewModel.openSearchScreen()
+
+        // check
+        eventsObserver.assertValue { it == OpenSearchScreen }
         eventsObserver.assertNoErrors()
     }
 

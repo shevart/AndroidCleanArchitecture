@@ -14,6 +14,7 @@ import com.shevart.rocketlaunches.di.component.AppComponent
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event.OpenLaunchDetail
+import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event.OpenSearchScreen
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.*
 import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter
@@ -58,6 +59,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         rvLaunches.layoutManager = LinearLayoutManager(requireContext())
         rvLaunches.adapter = adapter
         rvLaunches.addOnScrollListener(pagingListEndReachedListener)
+        ivLaunchesListSearch.setOnClickListener { viewModel.openSearchScreen() }
 
         observeLiveDataForceNonNull(viewModel.getStateLiveData(), this::renderState)
         viewModel.getEventsObservable()
@@ -82,6 +84,7 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
     private fun handleEvent(event: Event) {
         when (event) {
             is OpenLaunchDetail -> Launcher.openWiki(requireActivity(), event.launchId)
+            is OpenSearchScreen -> Launcher.searchLaunch(requireActivity())
         }
     }
 

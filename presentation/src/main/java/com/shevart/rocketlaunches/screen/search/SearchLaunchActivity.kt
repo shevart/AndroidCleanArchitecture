@@ -4,6 +4,8 @@ import android.os.Bundle
 import com.shevart.rocketlaunches.R
 import com.shevart.rocketlaunches.base.mvvm.AbsMvvmActivity
 import com.shevart.rocketlaunches.di.component.AppComponent
+import com.shevart.rocketlaunches.util.ui.startEdit
+import kotlinx.android.synthetic.main.activity_search_launch.*
 
 class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
     override fun provideViewModelClass() = SearchLaunchViewModel::class.java
@@ -14,6 +16,10 @@ class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        overridePendingTransition(0, 0)
+
+        etSearchLaunch.startEdit()
+
 
     }
 }

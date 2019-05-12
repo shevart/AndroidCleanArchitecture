@@ -16,7 +16,8 @@
         <activity
             android:name=".screen.home.host.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Splash">
+            android:theme="@style/AppTheme.Splash"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,11 +27,13 @@
         <activity
             android:name=".screen.detail.WikiPageActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Wiki" />
+            android:theme="@style/AppTheme.Wiki"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".screen.search.SearchLaunchActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Search" />
+            android:theme="@style/AppTheme.Search"
+            android:windowSoftInputMode="stateAlwaysVisible" />
     </application>
 
 </manifest>
