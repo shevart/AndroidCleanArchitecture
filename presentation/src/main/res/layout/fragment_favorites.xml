@@ -12,4 +12,8 @@
     <include
         android:id="@+id/vwEmptyVIew"
         layout="@layout/layout_empty_view" />
+
+    <include
+        android:id="@+id/vwLoadingView"
+        layout="@layout/layout_favorites_loading" />
 </FrameLayout>

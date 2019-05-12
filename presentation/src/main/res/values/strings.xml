@@ -30,6 +30,6 @@
     <string name="rocket_launch_country_flag_description">Rocket launch country flag</string>
     <string name="empty_wiki_title">Oh no!</string>
     <string name="empty_wiki_description">There is no Wiki page for this launch</string>
-    <string name="empty_favorites_title">@string/favorites</string>
+    <string name="empty_favorites_title">There are\nno favorites yet</string>
     <string name="empty_favorites_description">You can add any launches to Favorites by tapping on the Heart icon</string>
 </resources>
