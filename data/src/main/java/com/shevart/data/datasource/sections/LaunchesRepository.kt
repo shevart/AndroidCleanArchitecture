@@ -10,7 +10,9 @@ import com.shevart.domain.contract.data.PageResult
 import com.shevart.domain.models.common.DataWrapper
 import com.shevart.domain.models.launch.RocketLaunch
 import com.shevart.domain.util.mapByDataWrapper
+import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class LaunchesRepository
@@ -20,6 +22,9 @@ class LaunchesRepository
 ) : AbsSection(remoteDataProvider, localDataProvider), DataSource.LaunchesSection {
     private val launches = ArrayList<RocketLaunch>()
     private var totalLaunchesCount = 0
+
+    private val addedFavoritesSubject = PublishSubject.create<Long>()
+    private val removedFavoritesSubject = PublishSubject.create<Long>()
 
     override fun getLaunches(
         param: PageRequest,
@@ -51,11 +56,17 @@ class LaunchesRepository
 
     override fun addLaunchToFavorites(launch: RocketLaunch) =
         local.addToFavorites(launch)
-            .doOnComplete { setLaunchAsFavoriteInCache(launch) }!!
+            .doOnComplete { setLaunchAsFavoriteInCache(launch) }
+            .doOnComplete { addedFavoritesSubject.onNext(launch.id) }!!
 
     override fun removeLaunchFromFavorites(launch: RocketLaunch) =
         local.removeFromFavorites(launch.id)
-            .doOnComplete { setLaunchAsNotFavoriteInCache(launch) }!!
+            .doOnComplete { setLaunchAsNotFavoriteInCache(launch) }
+            .doOnComplete { removedFavoritesSubject.onNext(launch.id) }!!
+
+    override fun getLaunchAddedToFavoritesObservable() = addedFavoritesSubject
+
+    override fun getLaunchRemovedFromFavoritesObservable() = removedFavoritesSubject
 
     private fun getLaunchesListFromCache(param: PageRequest) =
         Single.just(

@@ -3,6 +3,7 @@ package com.shevart.domain.usecase.contract
 import com.shevart.domain.models.common.DataWrapper
 import com.shevart.domain.models.launch.RocketLaunch
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 interface LaunchesUseCase {
@@ -29,5 +30,18 @@ interface LaunchesUseCase {
 
     interface RemoveLaunchFromFavorites {
         fun execute(launchId: Long): Completable
+    }
+
+    interface GetFavoriteChangesObservable {
+        fun execute(): Observable<FavoriteEvent>
+
+        data class FavoriteEvent(
+            val launchId: Long,
+            val action: Action
+        ) {
+            enum class Action {
+                Added, Removed
+            }
+        }
     }
 }

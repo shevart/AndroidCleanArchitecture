@@ -62,6 +62,16 @@ class WikiPageActivity : AbsMvvmActivity<WikiPageViewModel>() {
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_favorite -> {
+                viewModel.favoriteButtonClick()
+                true
+            }
+            else -> false
+        }
+    }
+
     private fun renderState(state: State) {
         favoriteIconResId = if (state.favorite) {
             R.drawable.ic_favorite_red

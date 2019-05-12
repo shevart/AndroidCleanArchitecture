@@ -4,6 +4,7 @@ import com.shevart.domain.contract.data.FetchPolicy.SESSION_CACHE_OR_REMOTE
 import com.shevart.domain.models.common.DataWrapper
 import com.shevart.domain.models.launch.RocketLaunch
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 interface DataSource {
@@ -25,5 +26,15 @@ interface DataSource {
         fun addLaunchToFavorites(launch: RocketLaunch): Completable
 
         fun removeLaunchFromFavorites(launch: RocketLaunch): Completable
+
+        /**
+         * @return [Observable]<[Long]> with launchId which was added to favorites
+         */
+        fun getLaunchAddedToFavoritesObservable(): Observable<Long>
+
+        /**
+         * @return [Observable]<[Long]> with launchId which was removed from favorites
+         */
+        fun getLaunchRemovedFromFavoritesObservable(): Observable<Long>
     }
 }

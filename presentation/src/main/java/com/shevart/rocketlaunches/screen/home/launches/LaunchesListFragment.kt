@@ -2,6 +2,8 @@ package com.shevart.rocketlaunches.screen.home.launches
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionManager
 import com.shevart.rocketlaunches.R
@@ -67,7 +69,9 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
     }
 
     private fun renderState(state: State) {
-        flLaunchesRoot.animateChanges()
+        if (state.isAnimateChanges()) {
+            flLaunchesRoot.animateChanges()
+        }
         when (state) {
             is Loading -> showLoading()
             is ShowLaunchesList -> showLaunches(state)
@@ -104,4 +108,10 @@ class LaunchesListFragment : AbsMvvmFragment<LaunchesListViewModel>() {
         tvLaunchesTitle.textColorByColorId(R.color.white)
         errorViewHelper.showError(evLaunchesError, state.error)
     }
+
+    private fun State.isAnimateChanges() =
+        this is Loading && !ivLaunchesLoading.isInvisible ||
+                this is ShowLaunchesList && !rvLaunches.isVisible ||
+                this is Error && !evLaunchesError.isVisible
+
 }

@@ -1,14 +1,15 @@
 package com.shevart.rocketlaunches.screen.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import com.shevart.domain.models.common.DataWrapper
+import com.shevart.domain.usecase.contract.LaunchesUseCase
 import com.shevart.rocketlaunches.screen.detail.WikiPageViewModel.Event.ShowErrorAlert
 import com.shevart.rocketlaunches.screen.detail.WikiPageViewModel.State
 import com.shevart.rocketlaunches.screen.util.LAUNCH_ID
 import com.shevart.rocketlaunches.screen.util.launch
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
+import io.reactivex.Completable
 import io.reactivex.Single
 import org.junit.Before
 
@@ -21,9 +22,17 @@ class WikiPageViewModelTest {
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
     private val getUILaunchByIdUseCase = mock<UILaunchesUseCase.GetUILaunchById>()
+    private val addLaunchToFavoritesUseCase = mock<LaunchesUseCase.AddLaunchToFavorites>()
+    private val removeLaunchFromFavoritesUseCase = mock<LaunchesUseCase.RemoveLaunchFromFavorites>()
 
     @Before
     fun setUp() {
+        whenever(getUILaunchByIdUseCase.execute(LAUNCH_ID))
+            .thenReturn(Single.just(DataWrapper(launch)))
+        whenever(addLaunchToFavoritesUseCase.execute(any()))
+            .thenReturn(Completable.complete())
+        whenever(removeLaunchFromFavoritesUseCase.execute(any()))
+            .thenReturn(Completable.complete())
     }
 
     @Test
@@ -42,8 +51,6 @@ class WikiPageViewModelTest {
     @Test
     fun `test - load wiki`() {
         // prepare
-        whenever(getUILaunchByIdUseCase.execute(LAUNCH_ID))
-            .thenReturn(Single.just(DataWrapper(launch)))
         val viewModel = createViewModel()
 
         // perform
@@ -90,7 +97,45 @@ class WikiPageViewModelTest {
         eventsObserver.assertNoErrors()
     }
 
+    @Test
+    fun `test favorite click - add launch to favorite`() {
+        // prepare
+        val viewModel = createViewModel()
+        viewModel.setLaunchIdParam(LAUNCH_ID)
+
+        // perform
+        viewModel.favoriteButtonClick()
+
+        // check
+        val state = viewModel.getStateLiveData().value as State
+        assertEquals(launch.wikiUrl, state.wikiPageLink)
+        assertEquals(true, state.favorite)
+        assertEquals(false, state.emptyView)
+        verify(addLaunchToFavoritesUseCase, times(1)).execute(LAUNCH_ID)
+    }
+
+    @Test
+    fun `test favorite click - remove launch from favorite`() {
+        // prepare
+        whenever(getUILaunchByIdUseCase.execute(LAUNCH_ID))
+            .thenReturn(Single.just(DataWrapper(launch.copy(favorite = true))))
+        val viewModel = createViewModel()
+        viewModel.setLaunchIdParam(LAUNCH_ID)
+
+        // perform
+        viewModel.favoriteButtonClick()
+
+        // check
+        val state = viewModel.getStateLiveData().value as State
+        assertEquals(false, state.favorite)
+        assertEquals(launch.wikiUrl, state.wikiPageLink)
+        assertEquals(false, state.emptyView)
+        verify(removeLaunchFromFavoritesUseCase, times(1)).execute(LAUNCH_ID)
+    }
+
     private fun createViewModel() = WikiPageViewModel(
-        getUILaunchByIdUseCase = getUILaunchByIdUseCase
+        getUILaunchByIdUseCase = getUILaunchByIdUseCase,
+        addLaunchToFavoritesUseCase = addLaunchToFavoritesUseCase,
+        removeLaunchFromFavoritesUseCase = removeLaunchFromFavoritesUseCase
     )
 }
