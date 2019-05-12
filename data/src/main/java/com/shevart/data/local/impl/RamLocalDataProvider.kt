@@ -15,13 +15,19 @@ class RamLocalDataProvider
 
     override fun addToFavorites(launch: RocketLaunch) = Completable.fromRunnable {
         if (!favoritesList.contains(launch)) {
-            favoritesList.add(launch)
+            favoritesList.add(launch.copy(favorite = true))
         }
     }
 
-    override fun removeFromFavorites(launch: RocketLaunch) = Completable.fromRunnable {
-        favoritesList.remove(launch)
+    override fun removeFromFavorites(launchId: Long) = Completable.fromRunnable {
+        val favorite = favoritesList.find { it.id == launchId }
+        if (favorite != null) {
+            favoritesList.remove(favorite)
+        }
     }
 
     override fun getFavorites() = Single.just(favoritesList.toList())
+
+    override fun isFavorite(launchId: Long) =
+        favoritesList.find { it.id == launchId } != null
 }

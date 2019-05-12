@@ -51,9 +51,11 @@ class LaunchesRepository
 
     override fun addLaunchToFavorites(launch: RocketLaunch) =
         local.addToFavorites(launch)
+            .doOnComplete { setLaunchAsFavoriteInCache(launch) }!!
 
     override fun removeLaunchFromFavorites(launch: RocketLaunch) =
-        local.removeFromFavorites(launch)
+        local.removeFromFavorites(launch.id)
+            .doOnComplete { setLaunchAsNotFavoriteInCache(launch) }!!
 
     private fun getLaunchesListFromCache(param: PageRequest) =
         Single.just(
@@ -67,7 +69,15 @@ class LaunchesRepository
 
     private fun loadLaunchesListRemote(param: PageRequest) =
         remote.getRocketLaunches(param.count, param.offset)
+            .flatMap(this::updateFavoriteLaunches)
             .doOnSuccess { saveLaunchesList(param, it) }
+
+    private fun updateFavoriteLaunches(result: PageResult<RocketLaunch>) = loadFavoriteIds()
+        .map { favoriteIds ->
+            val launches = result.items.toMutableList()
+            launches.updateByIds(favoriteIds) { it.copy(favorite = true) }
+            return@map result.copy(items = launches)
+        }
 
     /**
      * There is very simple storage paged data to cache. It will be work
@@ -86,7 +96,22 @@ class LaunchesRepository
     private fun loadRocketLaunchRemote(launchId: Long): Single<DataWrapper<RocketLaunch>> =
         remote
             .getRocketLaunchById(launchId)
+            .map(this::setIsFavorite)
             .mapByDataWrapper()
+
+    private fun setIsFavorite(launch: RocketLaunch): RocketLaunch {
+        return if (local.isFavorite(launch.id)) {
+            launch.copy(favorite = true)
+        } else {
+            launch
+        }
+    }
+
+    private fun loadFavoriteIds() = local
+        .getFavorites()
+        .map { favorites ->
+            favorites.map { it.id }
+        }
 
     private fun getRocketLaunchFromLocal(launchId: Long): Single<DataWrapper<RocketLaunch>> =
         Single.fromCallable {
@@ -94,11 +119,41 @@ class LaunchesRepository
             return@fromCallable DataWrapper(launch)
         }
 
+    private fun setLaunchAsFavoriteInCache(launch: RocketLaunch) {
+        launches.updateById(launch.id) { it.copy(favorite = true) }
+    }
+
+    private fun setLaunchAsNotFavoriteInCache(launch: RocketLaunch) {
+        launches.updateById(launch.id) { it.copy(favorite = false) }
+    }
+
     private companion object {
         private fun PageRequest.biggerThanCacheItemsCount(itemsCount: Int) =
             (this.offset + this.count) > itemsCount
 
         private fun List<RocketLaunch>.hasLaunch(launchId: Long) =
             this.find { it.id == launchId } != null
+
+        private inline fun MutableList<RocketLaunch>.updateByIds(
+            launchIds: List<Long>,
+            update: (origin: RocketLaunch) -> RocketLaunch
+        ) {
+            launchIds.forEach { launchId ->
+                this.updateById(launchId, update)
+            }
+        }
+
+        private inline fun MutableList<RocketLaunch>.updateById(
+            launchId: Long,
+            update: (origin: RocketLaunch) -> RocketLaunch
+        ) {
+            val launch = this.find { it.id == launchId }
+            if (launch != null) {
+                val launchIndex = this.indexOf(launch)
+                this.removeAt(launchIndex)
+                this.add(launchIndex, update(launch))
+            }
+        }
+
     }
 }

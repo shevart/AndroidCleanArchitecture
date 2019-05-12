@@ -4,20 +4,17 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.*
 import com.shevart.domain.usecase.contract.LaunchesUseCase
 import com.shevart.rocketlaunches.models.UILaunch
-import com.shevart.rocketlaunches.models.UILaunchStatus
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event.OpenLaunchDetail
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.Loading
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.ShowLaunchesList
-import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter.LaunchViewHolder
 import com.shevart.rocketlaunches.screen.util.launch
 import com.shevart.rocketlaunches.screen.util.launchesList
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase.GetNextUILaunchesPage.UIResult
 import io.reactivex.Completable
 import io.reactivex.Single
+import org.junit.Assert.assertEquals
 import org.junit.Before
-
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 
@@ -28,6 +25,12 @@ class LaunchesListViewModelTest {
     private val getNextLaunchesPageUseCase = mock<UILaunchesUseCase.GetNextUILaunchesPage>()
     private val addLaunchToFavoritesUseCase = mock<LaunchesUseCase.AddLaunchToFavorites>()
     private val removeLaunchFromFavoritesUseCase = mock<LaunchesUseCase.RemoveLaunchFromFavorites>()
+    private val updateUILaunchFavoriteFieldUseCase =
+        object : UILaunchesUseCase.UpdateUILaunchFavoriteField {
+            override fun execute(launch: UILaunch, favorite: Boolean): UILaunch {
+                return launch.copy(favorite = favorite)
+            }
+        }
 
     private val singleLaunchesPage = UIResult(
         launches = launchesList,
@@ -179,6 +182,7 @@ class LaunchesListViewModelTest {
     private fun createViewModel() = LaunchesListViewModel(
         getNextLaunchesPageUseCase = getNextLaunchesPageUseCase,
         addLaunchToFavoritesUseCase = addLaunchToFavoritesUseCase,
-        removeLaunchFromFavoritesUseCase = removeLaunchFromFavoritesUseCase
+        removeLaunchFromFavoritesUseCase = removeLaunchFromFavoritesUseCase,
+        updateUILaunchFavoriteFieldUseCase = updateUILaunchFavoriteFieldUseCase
     )
 }

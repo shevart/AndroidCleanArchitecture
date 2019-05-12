@@ -17,7 +17,8 @@ class LaunchesListViewModel
 @Inject constructor(
     private val getNextLaunchesPageUseCase: UILaunchesUseCase.GetNextUILaunchesPage,
     private val addLaunchToFavoritesUseCase: LaunchesUseCase.AddLaunchToFavorites,
-    private val removeLaunchFromFavoritesUseCase: LaunchesUseCase.RemoveLaunchFromFavorites
+    private val removeLaunchFromFavoritesUseCase: LaunchesUseCase.RemoveLaunchFromFavorites,
+    private val updateUILaunchFavoriteFieldUseCase: UILaunchesUseCase.UpdateUILaunchFavoriteField
 ) : AbsStateViewModel<State, Event>() {
     private var nextPageLoadingNow = false
 
@@ -96,7 +97,6 @@ class LaunchesListViewModel
             successAction = this::markLaunchAsFavorite,
             failureAction = this::markLaunchAsNotFavorite
         )
-
     }
 
     private fun removeLaunchFromFavorites(launchId: Long) {
@@ -151,11 +151,13 @@ class LaunchesListViewModel
         }
         // update launch favorite field
         val launchPosition = launches.indexOf(launch)
-        launches.removeAt(launchPosition)
-        launches.add(launchPosition, launch.copy(favorite = favorite))
+        launches[launchPosition] = updateLaunchFavoriteUI(launch, favorite)
         // update state
         updateState(state.copy(launchesItems = launches))
     }
+
+    private fun updateLaunchFavoriteUI(launch: UILaunch, favorite: Boolean) =
+        updateUILaunchFavoriteFieldUseCase.execute(launch, favorite)
 
     sealed class Event {
         data class OpenLaunchDetail(val launchId: Long) : Event()
