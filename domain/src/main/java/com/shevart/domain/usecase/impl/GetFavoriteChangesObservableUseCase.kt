@@ -3,7 +3,7 @@ package com.shevart.domain.usecase.impl
 import com.shevart.domain.contract.data.DataSource
 import com.shevart.domain.contract.scheduler.SchedulerProvider
 import com.shevart.domain.usecase.contract.LaunchesUseCase
-import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.Event
+import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.FavoriteEvent
 import com.shevart.domain.util.subscribeOnIoObserveOnMain
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -28,13 +28,13 @@ class GetFavoriteChangesObservableUseCase
             .getLaunchRemovedFromFavoritesObservable()
             .map(this::createLaunchRemovedToFavoritesEvent)
 
-    private fun createLaunchAddedToFavoritesEvent(launchId: Long) = Event(
+    private fun createLaunchAddedToFavoritesEvent(launchId: Long) = FavoriteEvent(
         launchId = launchId,
-        action = Event.Action.Added
+        action = FavoriteEvent.Action.Added
     )
 
-    private fun createLaunchRemovedToFavoritesEvent(launchId: Long) = Event(
+    private fun createLaunchRemovedToFavoritesEvent(launchId: Long) = FavoriteEvent(
         launchId = launchId,
-        action = Event.Action.Removed
+        action = FavoriteEvent.Action.Removed
     )
 }

@@ -3,7 +3,7 @@ package com.shevart.domain.usecase.impl
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.shevart.domain.contract.data.DataSource
-import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.Event
+import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.FavoriteEvent
 import com.shevart.domain.util.schedulerProvider
 import io.reactivex.subjects.PublishSubject
 import junit.framework.Assert.assertEquals
@@ -20,8 +20,8 @@ class GetFavoriteChangesObservableUseCaseTest {
     private val addedLaunchId = 1L
     private val removedLaunchId = 2L
 
-    private val addedEvent = Event(addedLaunchId, Event.Action.Added)
-    private val removedEvent = Event(removedLaunchId, Event.Action.Removed)
+    private val addedEvent = FavoriteEvent(addedLaunchId, FavoriteEvent.Action.Added)
+    private val removedEvent = FavoriteEvent(removedLaunchId, FavoriteEvent.Action.Removed)
 
     @Before
     fun setUp() {

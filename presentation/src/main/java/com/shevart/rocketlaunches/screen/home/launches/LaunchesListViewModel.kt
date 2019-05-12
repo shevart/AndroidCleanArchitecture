@@ -1,6 +1,8 @@
 package com.shevart.rocketlaunches.screen.home.launches
 
 import com.shevart.domain.usecase.contract.LaunchesUseCase
+import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.FavoriteEvent
+import com.shevart.domain.usecase.impl.GetFavoriteChangesObservableUseCase
 import com.shevart.rocketlaunches.base.mvvm.AbsStateViewModel
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event
@@ -18,13 +20,15 @@ class LaunchesListViewModel
     private val getNextLaunchesPageUseCase: UILaunchesUseCase.GetNextUILaunchesPage,
     private val addLaunchToFavoritesUseCase: LaunchesUseCase.AddLaunchToFavorites,
     private val removeLaunchFromFavoritesUseCase: LaunchesUseCase.RemoveLaunchFromFavorites,
-    private val updateUILaunchFavoriteFieldUseCase: UILaunchesUseCase.UpdateUILaunchFavoriteField
+    private val updateUILaunchFavoriteFieldUseCase: UILaunchesUseCase.UpdateUILaunchFavoriteField,
+    private val getFavoritesChangesObservableUseCase: LaunchesUseCase.GetFavoriteChangesObservable
 ) : AbsStateViewModel<State, Event>() {
     private var nextPageLoadingNow = false
 
     init {
         updateState(Loading)
         loadFirstPage()
+        observeFavoritesChanges()
     }
 
     fun onListEndReached() {
@@ -88,6 +92,22 @@ class LaunchesListViewModel
         nextPageLoadingNow = false
         updateState(Error(e))
         defaultHandleException(e)
+    }
+
+    private fun observeFavoritesChanges() {
+        getFavoritesChangesObservableUseCase.execute()
+            .subscribe(
+                this::onFavoritesListChange,
+                this::defaultHandleException
+            )
+            .addToClearedDisposable()
+    }
+
+    private fun onFavoritesListChange(event: FavoriteEvent) {
+        updateLaunchFavoriteFieldInState(
+            launchId = event.launchId,
+            favorite = event.action == FavoriteEvent.Action.Added
+        )
     }
 
     private fun addLaunchToFavorites(launchId: Long) {

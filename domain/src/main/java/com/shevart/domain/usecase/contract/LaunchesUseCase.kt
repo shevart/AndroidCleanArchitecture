@@ -33,9 +33,9 @@ interface LaunchesUseCase {
     }
 
     interface GetFavoriteChangesObservable {
-        fun execute(): Observable<Event>
+        fun execute(): Observable<FavoriteEvent>
 
-        data class Event(
+        data class FavoriteEvent(
             val launchId: Long,
             val action: Action
         ) {
