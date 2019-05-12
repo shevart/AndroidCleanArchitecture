@@ -32,7 +32,7 @@ abstract class BaseActivity : AppCompatActivity() {
                 finish()
                 true
             }
-            else -> false
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

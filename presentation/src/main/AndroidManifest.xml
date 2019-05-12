@@ -26,6 +26,10 @@
         <activity
             android:name=".screen.detail.WikiPageActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".screen.search.SearchLaunchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Search" />
     </application>
 
 </manifest>

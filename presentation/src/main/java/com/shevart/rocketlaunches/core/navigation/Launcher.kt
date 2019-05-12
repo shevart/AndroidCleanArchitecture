@@ -3,6 +3,7 @@ package com.shevart.rocketlaunches.core.navigation
 import android.app.Activity
 import android.content.Intent
 import com.shevart.rocketlaunches.screen.detail.WikiPageActivity
+import com.shevart.rocketlaunches.screen.search.SearchLaunchActivity
 import com.shevart.rocketlaunches.util.checkIsWikiUrlValid
 import com.shevart.rocketlaunches.util.checkLaunchId
 import com.shevart.rocketlaunches.util.setLaunchId
@@ -14,5 +15,9 @@ object Launcher {
         val intent = Intent(activity, WikiPageActivity::class.java)
             .setLaunchId(launchId)
         activity.startActivity(intent)
+    }
+
+    fun searchLaunch(activity: Activity) {
+        activity.startActivity(Intent(activity, SearchLaunchActivity::class.java))
     }
 }
