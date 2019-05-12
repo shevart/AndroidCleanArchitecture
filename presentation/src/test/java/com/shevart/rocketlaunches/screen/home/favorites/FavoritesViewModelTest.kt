@@ -6,6 +6,9 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.shevart.domain.usecase.contract.LaunchesUseCase
+import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.FavoriteEvent
+import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.FavoriteEvent.Action.Added
+import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.FavoriteEvent.Action.Removed
 import com.shevart.rocketlaunches.screen.home.favorites.FavoritesViewModel.Event.OpenLaunchDetail
 import com.shevart.rocketlaunches.screen.home.favorites.FavoritesViewModel.State
 import com.shevart.rocketlaunches.screen.home.favorites.FavoritesViewModel.State.*
@@ -13,6 +16,7 @@ import com.shevart.rocketlaunches.screen.util.launchesList
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
 import io.reactivex.Completable
 import io.reactivex.Single
+import io.reactivex.subjects.PublishSubject
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -24,6 +28,8 @@ class FavoritesViewModelTest {
     val instantExecutorRule = InstantTaskExecutorRule()
     private val getFavoritesListUseCase = mock<UILaunchesUseCase.GetUIFavoriteLaunches>()
     private val removeLaunchFromFavorites = mock<LaunchesUseCase.RemoveLaunchFromFavorites>()
+    private val getFavoritesChangesObservableUseCase =
+        mock<LaunchesUseCase.GetFavoriteChangesObservable>()
 
     @Before
     fun setUp() {
@@ -120,8 +126,30 @@ class FavoritesViewModelTest {
         assertEquals(EmptyFavoritesList, state)
     }
 
+    @Test
+    fun `test favorites list changes - launch was removed from favorites`() {
+        // prepare
+        val eventsSubject = PublishSubject.create<FavoriteEvent>()
+        whenever(getFavoritesChangesObservableUseCase.execute()).thenReturn(eventsSubject)
+        val removedLaunchId = launchesList.first().id
+        val event = FavoriteEvent(
+            launchId = removedLaunchId,
+            action = Removed
+        )
+        val viewModel = createViewModel()
+
+        // perform
+        eventsSubject.onNext(event)
+
+        // check
+        val state = viewModel.getStateLiveData().value as FavoritesList
+        val launchFromStateList = state.favorites.find { it.id == removedLaunchId }
+        assertEquals(null, launchFromStateList)
+    }
+
     private fun createViewModel() = FavoritesViewModel(
         getFavoritesListUseCase = getFavoritesListUseCase,
-        removeLaunchFromFavorites = removeLaunchFromFavorites
+        removeLaunchFromFavorites = removeLaunchFromFavorites,
+        getFavoritesChangesObservableUseCase = getFavoritesChangesObservableUseCase
     )
 }
