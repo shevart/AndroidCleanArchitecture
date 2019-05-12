@@ -13,6 +13,6 @@
 
     <include
         android:id="@+id/vwEmptyWikiPage"
-        layout="@layout/layout_empty_wiki_page"
+        layout="@layout/layout_empty_view"
         android:visibility="gone" />
 </LinearLayout>

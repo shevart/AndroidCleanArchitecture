@@ -21,4 +21,15 @@ interface UILaunchesUseCase {
     interface GetUILaunchById {
         fun execute(launchId: Long): Single<DataWrapper<UILaunch>>
     }
+
+    interface GetUIFavoriteLaunches {
+        fun execute(): Single<List<UILaunch>>
+    }
+
+    /**
+     * Update UILaunch favorite field and UI favorite icon field
+     */
+    interface UpdateUILaunchFavoriteField {
+        fun execute(launch: UILaunch, favorite: Boolean): UILaunch
+    }
 }
