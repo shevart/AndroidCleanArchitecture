@@ -25,7 +25,8 @@
         </activity>
         <activity
             android:name=".screen.detail.WikiPageActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Wiki" />
         <activity
             android:name=".screen.search.SearchLaunchActivity"
             android:screenOrientation="portrait"
