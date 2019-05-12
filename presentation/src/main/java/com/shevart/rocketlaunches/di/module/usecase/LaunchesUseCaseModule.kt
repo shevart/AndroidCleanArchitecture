@@ -33,4 +33,9 @@ abstract class LaunchesUseCaseModule {
     abstract fun bindRemoveLaunchFromFavoritesUseCase(
         useCase: RemoveLaunchFromFavoritesUseCase
     ): LaunchesUseCase.RemoveLaunchFromFavorites
+
+    @Binds
+    abstract fun bindGetFavoriteChangesObservableUseCase(
+        useCase: GetFavoriteChangesObservableUseCase
+    ): LaunchesUseCase.GetFavoriteChangesObservable
 }
