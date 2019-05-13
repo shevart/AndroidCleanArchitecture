@@ -1,7 +1,10 @@
 package com.shevart.data.util
 
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import java.util.*
 
 object GsonUtil {
-    fun getGson() = Gson()
+    fun getGson() = GsonBuilder()
+        .registerTypeAdapter(Date::class.java, DateDeserializer())
+        .create()!!
 }
