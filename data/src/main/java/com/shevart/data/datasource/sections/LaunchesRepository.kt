@@ -52,6 +52,13 @@ class LaunchesRepository
         }
     }
 
+    override fun getLaunchesByName(param: PageRequest) =
+        remote.getRocketLaunchesByName(
+            name = param.name,
+            offset = param.offset,
+            count = param.count
+        )
+
     override fun getFavoritesLaunches() = local.getFavorites()
 
     override fun addLaunchToFavorites(launch: RocketLaunch) =

@@ -15,6 +15,7 @@ import com.shevart.rocketlaunches.screen.home.favorites.FavoritesViewModel.State
 import com.shevart.rocketlaunches.screen.util.launchesList
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import org.junit.Assert.assertEquals
@@ -35,6 +36,8 @@ class FavoritesViewModelTest {
     fun setUp() {
         whenever(getFavoritesListUseCase.execute())
             .thenReturn(Single.just(launchesList))
+        whenever(getFavoritesChangesObservableUseCase.execute())
+            .thenReturn(Observable.never())
     }
 
     @Test

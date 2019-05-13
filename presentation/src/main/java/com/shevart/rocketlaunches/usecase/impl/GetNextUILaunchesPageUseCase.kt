@@ -3,13 +3,12 @@ package com.shevart.rocketlaunches.usecase.impl
 import com.shevart.domain.contract.mapper.Mapper
 import com.shevart.domain.contract.scheduler.SchedulerProvider
 import com.shevart.domain.models.launch.RocketLaunch
+import com.shevart.domain.models.launch.SimplePageResult
 import com.shevart.domain.usecase.contract.LaunchesUseCase
-import com.shevart.domain.usecase.contract.LaunchesUseCase.GetNextLaunchesPage.Result
 import com.shevart.domain.util.subscribeOnIoObserveOnMain
 import com.shevart.rocketlaunches.di.name.UIMapperNames
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
-import com.shevart.rocketlaunches.usecase.UILaunchesUseCase.GetNextUILaunchesPage.UIResult
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -25,8 +24,8 @@ class GetNextUILaunchesPageUseCase
             .map(this::mapResult)
             .subscribeOnIoObserveOnMain(schedulerProvider)
 
-    private fun mapResult(result: Result): UIResult {
-        return UIResult(
+    private fun mapResult(result: SimplePageResult<RocketLaunch>): SimplePageResult<UILaunch> {
+        return SimplePageResult(
             launches = launchesMapper.mapList(result.launches),
             hasMoreItems = result.hasMoreItems
         )

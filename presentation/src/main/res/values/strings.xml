@@ -32,7 +32,7 @@
     <string name="empty_wiki_description">There is no Wiki page for this launch</string>
     <string name="empty_favorites_title">There are\nno favorites yet</string>
     <string name="empty_favorites_description">You can add any launches to Favorites by tapping on the Heart icon</string>
-    <string name="search_launch">Search launch</string>
+    <string name="search_launch">Search launches</string>
     <string name="cancel">Cancel</string>
     <string name="search_launches_description">Search launches</string>
 </resources>

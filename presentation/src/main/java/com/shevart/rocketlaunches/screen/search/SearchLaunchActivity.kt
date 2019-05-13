@@ -20,6 +20,8 @@ class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
 
         etSearchLaunch.startEdit()
 
+        tvSearchLaunchCancel.setOnClickListener {  }
+
 
     }
 }

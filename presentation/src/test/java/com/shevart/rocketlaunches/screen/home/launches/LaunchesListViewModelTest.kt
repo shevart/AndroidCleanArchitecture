@@ -2,6 +2,7 @@ package com.shevart.rocketlaunches.screen.home.launches
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.*
+import com.shevart.domain.models.launch.SimplePageResult
 import com.shevart.domain.usecase.contract.LaunchesUseCase
 import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.FavoriteEvent
 import com.shevart.rocketlaunches.models.UILaunch
@@ -12,7 +13,6 @@ import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Sta
 import com.shevart.rocketlaunches.screen.util.launch
 import com.shevart.rocketlaunches.screen.util.launchesList
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
-import com.shevart.rocketlaunches.usecase.UILaunchesUseCase.GetNextUILaunchesPage.UIResult
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -39,15 +39,15 @@ class LaunchesListViewModelTest {
             }
         }
 
-    private val singleLaunchesPage = UIResult(
+    private val singleLaunchesPage = SimplePageResult(
         launches = launchesList,
         hasMoreItems = false
     )
-    private val multiLaunchesPage = UIResult(
+    private val multiLaunchesPage = SimplePageResult(
         launches = launchesList,
         hasMoreItems = true
     )
-    private val singleLaunchesPageAllFavorites = UIResult(
+    private val singleLaunchesPageAllFavorites = SimplePageResult(
         launches = launchesList.map { it.copy(favorite = true) },
         hasMoreItems = true
     )

@@ -1,8 +1,8 @@
 package com.shevart.rocketlaunches.screen.home.launches
 
+import com.shevart.domain.models.launch.SimplePageResult
 import com.shevart.domain.usecase.contract.LaunchesUseCase
 import com.shevart.domain.usecase.contract.LaunchesUseCase.GetFavoriteChangesObservable.FavoriteEvent
-import com.shevart.domain.usecase.impl.GetFavoriteChangesObservableUseCase
 import com.shevart.rocketlaunches.base.mvvm.AbsStateViewModel
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Event
@@ -11,7 +11,6 @@ import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.Eve
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel.State.*
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
-import com.shevart.rocketlaunches.usecase.UILaunchesUseCase.GetNextUILaunchesPage.UIResult
 import com.shevart.rocketlaunches.util.plus
 import io.reactivex.Completable
 import javax.inject.Inject
@@ -68,7 +67,7 @@ class LaunchesListViewModel
             .addToClearedDisposable()
     }
 
-    private fun onFirstPageLoaded(pageResult: UIResult) {
+    private fun onFirstPageLoaded(pageResult: SimplePageResult<UILaunch>) {
         updateState(stateForFirstLoadedPage(pageResult))
     }
 
@@ -82,7 +81,7 @@ class LaunchesListViewModel
             .addToClearedDisposable()
     }
 
-    private fun onNextPageLoaded(pageResult: UIResult) {
+    private fun onNextPageLoaded(pageResult: SimplePageResult<UILaunch>) {
         nextPageLoadingNow = false
         val state = currentState as? ShowLaunchesList
         if (state == null) {
@@ -201,13 +200,13 @@ class LaunchesListViewModel
     }
 
     private companion object {
-        fun stateForFirstLoadedPage(pageResult: UIResult) =
+        fun stateForFirstLoadedPage(pageResult: SimplePageResult<UILaunch>) =
             ShowLaunchesList(
                 launchesItems = pageResult.launches,
                 showBottomListLoadingIndicator = pageResult.hasMoreItems
             )
 
-        fun ShowLaunchesList.addPage(pageResult: UIResult) = this.copy(
+        fun ShowLaunchesList.addPage(pageResult: SimplePageResult<UILaunch>) = this.copy(
             launchesItems = this.launchesItems.plus(pageResult.launches),
             showBottomListLoadingIndicator = pageResult.hasMoreItems
         )
