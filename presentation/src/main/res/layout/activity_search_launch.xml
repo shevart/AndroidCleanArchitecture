@@ -45,9 +45,18 @@
             tools:ignore="KeyboardInaccessibleWidget" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSearchItems"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSearchItems"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <include
+            android:id="@+id/vwSearchEmptyView"
+            layout="@layout/layout_empty_view" />
+    </FrameLayout>
 </LinearLayout>

@@ -1,7 +1,9 @@
 package com.shevart.rocketlaunches.screen.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.nhaarman.mockitokotlin2.mock
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State.EmptyList
+import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
 import org.junit.Before
 
 import org.junit.Assert.*
@@ -12,6 +14,7 @@ class SearchLaunchViewModelTest {
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
+    private val findLaunchesByNameUseCase = mock<UILaunchesUseCase.FindUILaunchesByName>()
 
     @Before
     fun setUp() {
@@ -29,5 +32,7 @@ class SearchLaunchViewModelTest {
         assertEquals(EmptyList, state)
     }
 
-    private fun createViewModel() = SearchLaunchViewModel()
+    private fun createViewModel() = SearchLaunchViewModel(
+        findLaunchesByNameUseCase = findLaunchesByNameUseCase
+    )
 }

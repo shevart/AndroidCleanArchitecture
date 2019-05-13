@@ -53,6 +53,13 @@ class SearchLaunchRVAdapter : BaseRVAdapter<UILaunch, RecyclerView.ViewHolder>()
         }
     }
 
+    fun setShowLoadingBottomItem(showLoadingBottomItem: Boolean, refreshData: Boolean = true) {
+        this.showLoadingBottomItem = showLoadingBottomItem
+        if (refreshData) {
+            notifyDataSetChanged()
+        }
+    }
+
     private fun bindLaunchItem(holder: LaunchViewHolder, launch: UILaunch) {
         if (!launch.imageUrl.isNullOrBlank()) {
             holder.ivSearchLaunch.loadInto(launch.imageUrl)

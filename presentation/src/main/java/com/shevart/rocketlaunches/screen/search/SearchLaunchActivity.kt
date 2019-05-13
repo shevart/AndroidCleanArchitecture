@@ -11,14 +11,19 @@ import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event.Fini
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State.*
 import com.shevart.rocketlaunches.util.observeLiveDataForceNonNull
-import com.shevart.rocketlaunches.util.ui.DividerItemDecoration
-import com.shevart.rocketlaunches.util.ui.gone
-import com.shevart.rocketlaunches.util.ui.startEdit
-import com.shevart.rocketlaunches.util.ui.visible
+import com.shevart.rocketlaunches.util.ui.*
 import kotlinx.android.synthetic.main.activity_search_launch.*
+import kotlinx.android.synthetic.main.layout_empty_view.*
 
 class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
     private lateinit var adapter: SearchLaunchRVAdapter
+    private val pagingListEndReachedListener: ListScrollItemListener by lazy {
+        object : ListScrollItemListener(rvSearchItems.layoutManager!!) {
+            override fun onEndListReached() {
+                viewModel.onListEndReached()
+            }
+        }
+    }
 
     override fun provideViewModelClass() = SearchLaunchViewModel::class.java
 
@@ -35,7 +40,12 @@ class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
         adapter = SearchLaunchRVAdapter()
         rvSearchItems.adapter = adapter
         rvSearchItems.layoutManager = LinearLayoutManager(this)
+        rvSearchItems.addOnScrollListener(pagingListEndReachedListener)
         rvSearchItems.addItemDecoration(DividerItemDecoration(this, R.drawable.shape_list_divider))
+
+        ivEmptyViewLogo.setImageResource(R.drawable.not_found)
+        tvEmptyViewTitle.setText(R.string.error_not_found)
+        tvEmptyViewDescription.setText(R.string.error_not_found_description)
 
         RxTextView.textChanges(etSearchLaunch)
             .skipInitialValue()
@@ -71,14 +81,19 @@ class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
 
     private fun showEmptyList() {
         rvSearchItems.gone()
+        vwSearchEmptyView.gone()
     }
 
     private fun showLaunchesNotFound() {
-
+        vwSearchEmptyView.visible()
+        rvSearchItems.gone()
     }
 
     private fun showLaunches(state: ShowFoundLaunches) {
         rvSearchItems.visible()
+        vwSearchEmptyView.gone()
+        // the order is important
+        adapter.setShowLoadingBottomItem(state.showBottomProgress, refreshData = false)
         adapter.updateItems(state.launches)
     }
 }

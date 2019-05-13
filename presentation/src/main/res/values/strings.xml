@@ -24,6 +24,8 @@
     <string name="error_no_internet">No internet connection!</string>
     <string name="error_no_internet_description">Try turn on WiFi or mobile network.\nAnd come back ;)</string>
     <string name="error_unknown">Oops, something went wrong!</string>
+    <string name="error_not_found">No found</string>
+    <string name="error_not_found_description">Try something else</string>
 
     <string name="rocket_launch_image_description">Rocket launch image</string>
     <string name="rocket_launch_favorite_button_description">Rocket launch favorite button</string>

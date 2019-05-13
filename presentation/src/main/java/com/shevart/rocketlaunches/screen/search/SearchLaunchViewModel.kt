@@ -8,13 +8,15 @@ import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event.Fini
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State.*
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
-import com.shevart.rocketlaunches.util.checkLaunchNameForSearch
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 class SearchLaunchViewModel
 @Inject constructor(
     private val findLaunchesByNameUseCase: UILaunchesUseCase.FindUILaunchesByName
 ) : AbsStateViewModel<State, Event>() {
+    private var nextPageLoadingDisposable: Disposable? = null
+    private var name = ""
 
     init {
         updateState(EmptyList)
@@ -25,16 +27,54 @@ class SearchLaunchViewModel
     }
 
     fun findLaunches(name: String) {
+        this.name = name
         if (name.length < 3) {
             showEmptyList()
             return
         }
+        nextPageLoadingDisposable?.dispose()
+        nextPageLoadingDisposable = null
         findLaunchesByNameUseCase.execute(name, showedItems = 0)
             .subscribe(
                 this::onFindLaunchesResult,
-                this::defaultHandleException
+                this::onLaunchSearchError
             )
             .addToClearedDisposable()
+    }
+
+    fun onListEndReached() {
+        val state = currentState as? ShowFoundLaunches
+        val loadNextPage = state?.showBottomProgress == true &&
+                nextPageLoadingDisposable == null
+        if (loadNextPage) {
+            loadNextPage(name, state!!.launches.size)
+        }
+    }
+
+    private fun loadNextPage(name: String, showedItems: Int) {
+        nextPageLoadingDisposable = findLaunchesByNameUseCase
+            .execute(name, showedItems)
+            .doOnError { nextPageLoadingDisposable = null }
+            .subscribe(
+                this::onNextPageLoaded,
+                this::onLaunchSearchError
+            )
+            .addToClearedDisposable()
+    }
+
+    private fun onNextPageLoaded(result: SimplePageResult<UILaunch>) {
+        nextPageLoadingDisposable = null
+        val state = currentState as? ShowFoundLaunches
+        if (state == null) {
+            onFindLaunchesResult(result)
+            return
+        }
+        updateState(state.addPage(result))
+    }
+
+    private fun onLaunchSearchError(e: Throwable) {
+        defaultHandleException(e)
+        updateState(LaunchesNotFound)
     }
 
     private fun showEmptyList() {
@@ -70,5 +110,10 @@ class SearchLaunchViewModel
                 launches = this.launches,
                 showBottomProgress = this.hasMoreItems
             )
+
+        fun ShowFoundLaunches.addPage(pageResult: SimplePageResult<UILaunch>) = this.copy(
+            launches = this.launches.plus(pageResult.launches),
+            showBottomProgress = pageResult.hasMoreItems
+        )
     }
 }
