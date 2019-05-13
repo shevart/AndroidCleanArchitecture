@@ -35,4 +35,6 @@
     <string name="search_launch">Search launches</string>
     <string name="cancel">Cancel</string>
     <string name="search_launches_description">Search launches</string>
+    <string name="launch_image_description">Launch image</string>
+    <string name="country_flag_description">Country flag</string>
 </resources>

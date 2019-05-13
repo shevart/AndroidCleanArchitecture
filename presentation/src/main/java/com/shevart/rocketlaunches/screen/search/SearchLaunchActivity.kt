@@ -10,7 +10,6 @@ import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event.FinishSearching
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State.*
-import com.shevart.rocketlaunches.screen.shared.launch.LaunchRVAdapter
 import com.shevart.rocketlaunches.util.observeLiveDataForceNonNull
 import com.shevart.rocketlaunches.util.ui.gone
 import com.shevart.rocketlaunches.util.ui.startEdit
@@ -18,7 +17,7 @@ import com.shevart.rocketlaunches.util.ui.visible
 import kotlinx.android.synthetic.main.activity_search_launch.*
 
 class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
-    private lateinit var adapter: LaunchRVAdapter
+    private lateinit var adapter: SearchLaunchRVAdapter
 
     override fun provideViewModelClass() = SearchLaunchViewModel::class.java
 
@@ -32,7 +31,7 @@ class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
 
         etSearchLaunch.startEdit()
         tvSearchLaunchCancel.setOnClickListener { viewModel.cancel() }
-        adapter = LaunchRVAdapter()
+        adapter = SearchLaunchRVAdapter()
         rvSearchItems.adapter = adapter
         rvSearchItems.layoutManager = LinearLayoutManager(this)
 
