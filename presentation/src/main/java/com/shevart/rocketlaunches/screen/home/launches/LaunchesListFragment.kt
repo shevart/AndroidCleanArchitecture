@@ -5,9 +5,7 @@ import android.view.View
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.TransitionManager
 import com.shevart.rocketlaunches.R
-import com.shevart.rocketlaunches.base.adapter.ItemClickListener
 import com.shevart.rocketlaunches.base.mvvm.AbsMvvmFragment
 import com.shevart.rocketlaunches.core.navigation.Launcher
 import com.shevart.rocketlaunches.di.component.AppComponent
