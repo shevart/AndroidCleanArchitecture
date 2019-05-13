@@ -5,6 +5,7 @@ import com.shevart.rocketlaunches.base.mvvm.AbsStateViewModel
 import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event.FinishSearching
+import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event.OpenLaunch
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State.*
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
@@ -24,6 +25,10 @@ class SearchLaunchViewModel
 
     fun cancel() {
         sendEvent(FinishSearching)
+    }
+
+    fun openLaunch(launch: UILaunch) {
+        sendEvent(OpenLaunch(launch.id))
     }
 
     fun findLaunches(name: String) {
@@ -101,6 +106,7 @@ class SearchLaunchViewModel
     }
 
     sealed class Event {
+        data class OpenLaunch(val launchId: Long) : Event()
         object FinishSearching : Event()
     }
 

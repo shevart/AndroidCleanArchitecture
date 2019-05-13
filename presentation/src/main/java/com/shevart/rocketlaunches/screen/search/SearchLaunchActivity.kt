@@ -1,13 +1,18 @@
 package com.shevart.rocketlaunches.screen.search
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.shevart.rocketlaunches.R
+import com.shevart.rocketlaunches.base.adapter.ItemClickListener
 import com.shevart.rocketlaunches.base.mvvm.AbsMvvmActivity
+import com.shevart.rocketlaunches.core.navigation.Launcher
 import com.shevart.rocketlaunches.di.component.AppComponent
+import com.shevart.rocketlaunches.models.UILaunch
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event.FinishSearching
+import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event.OpenLaunch
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State.*
 import com.shevart.rocketlaunches.util.observeLiveDataForceNonNull
@@ -38,6 +43,11 @@ class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
         etSearchLaunch.startEdit()
         tvSearchLaunchCancel.setOnClickListener { viewModel.cancel() }
         adapter = SearchLaunchRVAdapter()
+        adapter.setItemClickListener(object : ItemClickListener<UILaunch> {
+            override fun onItemClick(item: UILaunch, position: Int, view: View?) {
+                viewModel.openLaunch(item)
+            }
+        })
         rvSearchItems.adapter = adapter
         rvSearchItems.layoutManager = LinearLayoutManager(this)
         rvSearchItems.addOnScrollListener(pagingListEndReachedListener)
@@ -75,6 +85,7 @@ class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
 
     private fun handleEvent(event: Event) {
         when (event) {
+            is OpenLaunch -> Launcher.openWiki(this, event.launchId)
             is FinishSearching -> finish()
         }
     }

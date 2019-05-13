@@ -23,6 +23,6 @@ interface LaunchApi {
 
     @GET(API_1_4 + LAUNCH + LAUNCH_ID_PARAM)
     fun getLaunchById(
-        @Path(LAUNCH_ID_PARAM) launchId: Long
+        @Path(LAUNCH_ID_NAME) launchId: Long
     ): Single<GetLaunchesResponse>
 }
