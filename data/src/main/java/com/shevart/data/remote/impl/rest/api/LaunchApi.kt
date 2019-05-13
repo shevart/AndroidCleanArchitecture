@@ -16,7 +16,7 @@ interface LaunchApi {
 
     @GET(API_1_4 + LAUNCH + NAME_PARAM)
     fun getLaunchesByName(
-        @Path(NAME_PARAM) name: String,
+        @Path(NAME) name: String,
         @Query(OFFSET) offset: Int,
         @Query(COUNT_PARAM_NAME) count: Int
     ): Single<GetLaunchesResponse>

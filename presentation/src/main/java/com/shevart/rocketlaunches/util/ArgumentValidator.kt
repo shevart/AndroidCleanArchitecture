@@ -20,3 +20,9 @@ fun Long.checkLaunchId() {
         throw IllegalArgumentException("There is a very bad launchId - $this!")
     }
 }
+
+fun String.checkLaunchNameForSearch() {
+    if (this.length < 3) {
+        throw IllegalArgumentException("The length of search name must be equal or bigger than 3!")
+    }
+}

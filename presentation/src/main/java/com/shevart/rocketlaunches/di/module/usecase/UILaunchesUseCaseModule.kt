@@ -3,10 +3,7 @@
 package com.shevart.rocketlaunches.di.module.usecase
 
 import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
-import com.shevart.rocketlaunches.usecase.impl.GetNextUILaunchesPageUseCase
-import com.shevart.rocketlaunches.usecase.impl.GetUIFavoriteLaunchesUseCase
-import com.shevart.rocketlaunches.usecase.impl.GetUILaunchByIdUseCase
-import com.shevart.rocketlaunches.usecase.impl.UpdateUILaunchFavoriteFieldUseCase
+import com.shevart.rocketlaunches.usecase.impl.*
 import dagger.Binds
 import dagger.Module
 
@@ -31,4 +28,9 @@ abstract class UILaunchesUseCaseModule {
     abstract fun bindUpdateUILaunchFavoriteFieldUseCase(
         useCase: UpdateUILaunchFavoriteFieldUseCase
     ): UILaunchesUseCase.UpdateUILaunchFavoriteField
+
+    @Binds
+    abstract fun bindFindUILaunchesByNameUseCase(
+        useCase: FindUILaunchesByNameUseCase
+    ): UILaunchesUseCase.FindUILaunchesByName
 }

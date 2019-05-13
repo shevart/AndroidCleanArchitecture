@@ -29,7 +29,7 @@ interface UILaunchesUseCase {
         fun execute(launch: UILaunch, favorite: Boolean): UILaunch
     }
 
-    interface FindLaunchesByName {
+    interface FindUILaunchesByName {
         fun execute(name: String, showedItems: Int): Single<SimplePageResult<UILaunch>>
     }
 }
