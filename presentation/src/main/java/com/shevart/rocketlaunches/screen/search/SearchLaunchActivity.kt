@@ -11,6 +11,7 @@ import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.Event.Fini
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State
 import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel.State.*
 import com.shevart.rocketlaunches.util.observeLiveDataForceNonNull
+import com.shevart.rocketlaunches.util.ui.DividerItemDecoration
 import com.shevart.rocketlaunches.util.ui.gone
 import com.shevart.rocketlaunches.util.ui.startEdit
 import com.shevart.rocketlaunches.util.ui.visible
@@ -34,6 +35,7 @@ class SearchLaunchActivity : AbsMvvmActivity<SearchLaunchViewModel>() {
         adapter = SearchLaunchRVAdapter()
         rvSearchItems.adapter = adapter
         rvSearchItems.layoutManager = LinearLayoutManager(this)
+        rvSearchItems.addItemDecoration(DividerItemDecoration(this, R.drawable.shape_list_divider))
 
         RxTextView.textChanges(etSearchLaunch)
             .skipInitialValue()

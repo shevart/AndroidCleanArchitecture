@@ -12,16 +12,14 @@
 
     <ImageView
         android:id="@+id/ivSearchLaunch"
-        android:layout_width="@dimen/searchListImageHeight"
-        android:layout_height="@dimen/searchListImageHeight"
-        android:layout_marginStart="@dimen/baseDimen"
+        android:layout_width="@dimen/searchListItemHeight"
+        android:layout_height="@dimen/searchListItemHeight"
         android:adjustViewBounds="true"
         android:contentDescription="@string/launch_image_description"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         tools:srcCompat="@drawable/rocket_list_default" />
 
     <TextView
