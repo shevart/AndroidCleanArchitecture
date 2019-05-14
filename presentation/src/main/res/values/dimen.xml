@@ -13,4 +13,6 @@
     <dimen name="textBigTitleDimen">33sp</dimen>
 
     <dimen name="contentMediumWidth">300dp</dimen>
+    <dimen name="searchListItemHeight">100dp</dimen>
+    <dimen name="searchListImageHeight">90dp</dimen>
 </resources>

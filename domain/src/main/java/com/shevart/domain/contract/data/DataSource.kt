@@ -21,6 +21,11 @@ interface DataSource {
             fetchPolicy: FetchPolicy = SESSION_CACHE_OR_REMOTE
         ): Single<DataWrapper<RocketLaunch>>
 
+        /**
+         * Remote only
+         */
+        fun getLaunchesByName(param: PageRequest): Single<PageResult<RocketLaunch>>
+
         fun getFavoritesLaunches(): Single<List<RocketLaunch>>
 
         fun addLaunchToFavorites(launch: RocketLaunch): Completable

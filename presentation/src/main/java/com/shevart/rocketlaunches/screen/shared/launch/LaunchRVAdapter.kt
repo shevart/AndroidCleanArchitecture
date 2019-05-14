@@ -28,13 +28,13 @@ class LaunchRVAdapter : BaseRVAdapter<UILaunch, RecyclerView.ViewHolder>() {
         return if (showLoadingBottomItem && position == (itemCount - 1)) {
             LOADING_ITEM_VIEW_TYPE
         } else {
-            RECORD_VIEW_TYPE
+            LAUNCH_VIEW_TYPE
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            RECORD_VIEW_TYPE -> {
+            LAUNCH_VIEW_TYPE -> {
                 LaunchViewHolder(inflate(parent, R.layout.item_rocket_launch)).apply {
                     clLaunchItemContent.setOnClickListener {
                         launchItemClickListener?.onLaunchClick(launch = getItem(adapterPosition))
@@ -108,7 +108,7 @@ class LaunchRVAdapter : BaseRVAdapter<UILaunch, RecyclerView.ViewHolder>() {
     class BottomLoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     private companion object {
-        private const val RECORD_VIEW_TYPE = 1
+        private const val LAUNCH_VIEW_TYPE = 1
         private const val LOADING_ITEM_VIEW_TYPE = 2
     }
 

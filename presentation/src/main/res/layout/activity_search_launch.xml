@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".screen.search.SearchLaunchActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/doubleDimen"
+        android:paddingTop="@dimen/mediumDimen"
+        android:paddingEnd="@dimen/doubleDimen"
+        android:paddingBottom="@dimen/mediumDimen">
+
+        <EditText
+            android:id="@+id/etSearchLaunch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/search_launch"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:textColor="@color/greyDark"
+            android:textColorHint="@color/greyLight"
+            tools:ignore="Autofill,TextFields" />
+
+        <TextView
+            android:id="@+id/tvSearchLaunchCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:paddingStart="@dimen/baseDimen"
+            android:paddingEnd="@dimen/baseDimen"
+            android:text="@string/cancel"
+            android:textColor="@color/greyDark"
+            tools:ignore="KeyboardInaccessibleWidget" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSearchItems"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <include
+            android:id="@+id/vwSearchEmptyView"
+            layout="@layout/layout_empty_view" />
+    </FrameLayout>
+</LinearLayout>

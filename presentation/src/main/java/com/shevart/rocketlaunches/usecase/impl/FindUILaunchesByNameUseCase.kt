@@ -12,15 +12,15 @@ import com.shevart.rocketlaunches.usecase.UILaunchesUseCase
 import javax.inject.Inject
 import javax.inject.Named
 
-class GetNextUILaunchesPageUseCase
+class FindUILaunchesByNameUseCase
 @Inject constructor(
-    private val getNextLaunchesPageUseCase: LaunchesUseCase.GetNextLaunchesPage,
-    private val schedulerProvider: SchedulerProvider,
+    private val findLaunchesByNameUseCase: LaunchesUseCase.FindLaunchesByName,
     @Named(UIMapperNames.UI_MAPPER_LAUNCH)
-    private val launchesMapper: Mapper<RocketLaunch, UILaunch>
-) : UILaunchesUseCase.GetNextUILaunchesPage {
-    override fun execute(showedItems: Int) =
-        getNextLaunchesPageUseCase.execute(showedItems)
+    private val launchesMapper: Mapper<RocketLaunch, UILaunch>,
+    private val schedulerProvider: SchedulerProvider
+) : UILaunchesUseCase.FindUILaunchesByName {
+    override fun execute(name: String, showedItems: Int) =
+        findLaunchesByNameUseCase.execute(name, showedItems)
             .map(this::mapResult)
             .subscribeOnIoObserveOnMain(schedulerProvider)
 

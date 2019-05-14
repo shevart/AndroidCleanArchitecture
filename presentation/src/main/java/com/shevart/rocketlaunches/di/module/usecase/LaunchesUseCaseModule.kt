@@ -38,4 +38,9 @@ abstract class LaunchesUseCaseModule {
     abstract fun bindGetFavoriteChangesObservableUseCase(
         useCase: GetFavoriteChangesObservableUseCase
     ): LaunchesUseCase.GetFavoriteChangesObservable
+
+    @Binds
+    abstract fun bindFindLaunchesByNameUseCase(
+        useCase: FindLaunchesByNameUseCase
+    ): LaunchesUseCase.FindLaunchesByName
 }

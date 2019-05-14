@@ -2,6 +2,7 @@ package com.shevart.rocketlaunches.usecase
 
 import com.shevart.domain.models.common.DataWrapper
 import com.shevart.domain.models.launch.RocketLaunch
+import com.shevart.domain.models.launch.SimplePageResult
 import com.shevart.rocketlaunches.models.UILaunch
 import io.reactivex.Single
 
@@ -10,12 +11,7 @@ import io.reactivex.Single
  */
 interface UILaunchesUseCase {
     interface GetNextUILaunchesPage {
-        fun execute(showedItems: Int): Single<UIResult>
-
-        data class UIResult(
-            val launches: List<UILaunch>,
-            val hasMoreItems: Boolean
-        )
+        fun execute(showedItems: Int): Single<SimplePageResult<UILaunch>>
     }
 
     interface GetUILaunchById {
@@ -31,5 +27,9 @@ interface UILaunchesUseCase {
      */
     interface UpdateUILaunchFavoriteField {
         fun execute(launch: UILaunch, favorite: Boolean): UILaunch
+    }
+
+    interface FindUILaunchesByName {
+        fun execute(name: String, showedItems: Int): Single<SimplePageResult<UILaunch>>
     }
 }

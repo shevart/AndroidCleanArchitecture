@@ -41,9 +41,10 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:${rxBindingsVersion}"
+    implementation "com.jakewharton.rxbinding2:rxbinding-design-kotlin:${rxBindingsVersion}"
     // Dagger
     implementation "com.google.dagger:dagger:$daggerVersion"
-//    implementation "com.google.dagger:dagger-android-support:$daggerAdnroidVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     // UI
     implementation "androidx.recyclerview:recyclerview:$recycleViewVersion"

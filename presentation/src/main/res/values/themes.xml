@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -10,5 +10,18 @@
     <style name="AppTheme.Splash">
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:windowBackground">@drawable/drawable_splash_bg</item>
+    </style>
+
+    <style name="AppTheme.Wiki" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowBackground">@drawable/drawable_splash_bg</item>
+    </style>
+
+    <style name="AppTheme.Search">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/blackAlpha20</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 </resources>

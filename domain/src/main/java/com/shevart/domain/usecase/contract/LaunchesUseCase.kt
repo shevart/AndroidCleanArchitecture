@@ -1,5 +1,6 @@
 package com.shevart.domain.usecase.contract
 
+import com.shevart.domain.models.launch.SimplePageResult
 import com.shevart.domain.models.common.DataWrapper
 import com.shevart.domain.models.launch.RocketLaunch
 import io.reactivex.Completable
@@ -8,12 +9,7 @@ import io.reactivex.Single
 
 interface LaunchesUseCase {
     interface GetNextLaunchesPage {
-        fun execute(showedItems: Int): Single<Result>
-
-        data class Result(
-            val launches: List<RocketLaunch>,
-            val hasMoreItems: Boolean
-        )
+        fun execute(showedItems: Int): Single<SimplePageResult<RocketLaunch>>
     }
 
     interface GetLaunchById {
@@ -35,13 +31,14 @@ interface LaunchesUseCase {
     interface GetFavoriteChangesObservable {
         fun execute(): Observable<FavoriteEvent>
 
-        data class FavoriteEvent(
-            val launchId: Long,
-            val action: Action
-        ) {
+        data class FavoriteEvent(val launchId: Long, val action: Action) {
             enum class Action {
                 Added, Removed
             }
         }
+    }
+
+    interface FindLaunchesByName {
+        fun execute(name: String, showedItems: Int): Single<SimplePageResult<RocketLaunch>>
     }
 }

@@ -8,4 +8,10 @@ interface RemoteDataProvider {
     fun getRocketLaunches(count: Int, offset: Int = 0): Single<PageResult<RocketLaunch>>
 
     fun getRocketLaunchById(launchId: Long): Single<RocketLaunch>
+
+    fun getRocketLaunchesByName(
+        name: String,
+        count: Int,
+        offset: Int
+    ): Single<PageResult<RocketLaunch>>
 }

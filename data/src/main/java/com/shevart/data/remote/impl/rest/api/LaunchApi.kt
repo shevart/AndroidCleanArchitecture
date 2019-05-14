@@ -14,8 +14,15 @@ interface LaunchApi {
         @Query(OFFSET) offset: Int
     ): Single<GetLaunchesResponse>
 
+    @GET(API_1_4 + LAUNCH + NAME_PARAM)
+    fun getLaunchesByName(
+        @Path(NAME) name: String,
+        @Query(OFFSET) offset: Int,
+        @Query(COUNT_PARAM_NAME) count: Int
+    ): Single<GetLaunchesResponse>
+
     @GET(API_1_4 + LAUNCH + LAUNCH_ID_PARAM)
     fun getLaunchById(
-        @Path(LAUNCH_ID_PARAM) launchId: Long
+        @Path(LAUNCH_ID_NAME) launchId: Long
     ): Single<GetLaunchesResponse>
 }

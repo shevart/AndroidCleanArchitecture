@@ -68,7 +68,7 @@ class WikiPageActivity : AbsMvvmActivity<WikiPageViewModel>() {
                 viewModel.favoriteButtonClick()
                 true
             }
-            else -> false
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

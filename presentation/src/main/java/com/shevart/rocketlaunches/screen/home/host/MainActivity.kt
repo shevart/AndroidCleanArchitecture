@@ -24,9 +24,8 @@ class MainActivity : AbsMvvmActivity<MainScreenViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()// do via theme
-        bnHomeNavi.setOnNavigationItemSelectedListener(this::onBottomNaviItemSelected)
 
+        bnHomeNavi.setOnNavigationItemSelectedListener(this::onBottomNaviItemSelected)
         observeLiveDataForceNonNull(viewModel.getStateLiveData(), this::renderState)
     }
 

@@ -12,6 +12,7 @@ import com.shevart.rocketlaunches.screen.detail.WikiPageActivity
 import com.shevart.rocketlaunches.screen.home.favorites.FavoritesFragment
 import com.shevart.rocketlaunches.screen.home.host.MainActivity
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListFragment
+import com.shevart.rocketlaunches.screen.search.SearchLaunchActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -38,6 +39,8 @@ interface AppComponent {
     fun inject(activity: MainActivity)
 
     fun inject(activity: WikiPageActivity)
+
+    fun inject(activity: SearchLaunchActivity)
 
     fun inject(fragment: LaunchesListFragment)
 

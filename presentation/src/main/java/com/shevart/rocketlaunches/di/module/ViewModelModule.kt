@@ -9,6 +9,7 @@ import com.shevart.rocketlaunches.screen.detail.WikiPageViewModel
 import com.shevart.rocketlaunches.screen.home.favorites.FavoritesViewModel
 import com.shevart.rocketlaunches.screen.home.host.MainScreenViewModel
 import com.shevart.rocketlaunches.screen.home.launches.LaunchesListViewModel
+import com.shevart.rocketlaunches.screen.search.SearchLaunchViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -37,6 +38,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FavoritesViewModel::class)
     internal abstract fun bindFavoritesViewModel(viewModel: FavoritesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchLaunchViewModel::class)
+    internal abstract fun bindSearchLaunchViewModel(viewModel: SearchLaunchViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

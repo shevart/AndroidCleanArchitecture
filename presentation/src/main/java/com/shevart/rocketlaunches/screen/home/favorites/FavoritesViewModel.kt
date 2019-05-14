@@ -60,7 +60,7 @@ class FavoritesViewModel
 
         val indexOfRemovedLaunch = favorites.indexOfFirst { it.id == launchId }
         if (indexOfRemovedLaunch == -1) {
-            throw IllegalStateException()
+            return
         }
         favorites.removeAt(indexOfRemovedLaunch)
         updateFavoritesList(favorites)

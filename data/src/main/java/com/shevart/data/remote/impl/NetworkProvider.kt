@@ -28,4 +28,13 @@ class NetworkProvider
             .getLaunchById(launchId)
             .map { it.launches.first() }
             .map(launchMapper::map)
+
+    override fun getRocketLaunchesByName(
+        name: String,
+        count: Int,
+        offset: Int
+    ): Single<PageResult<RocketLaunch>> =
+        launchApi
+            .getLaunchesByName(name, offset, count)
+            .map { it.convertLaunchesResult(launchMapper) }
 }
